@@ -101,8 +101,7 @@ export function useGetChainsBalances() {
 }
 
 // Get the Tokens of wallet
-export function useGetWalletChainTokens(chainId: number) {
-  const account = "0xc043d71f7455f9e8b65bc037e9252f6fd83849ef";
+export function useGetWalletChainTokens(chainId: number, account: string) {
   let chain = getChainByNumber(chainId);
   // This functions is temporary for Pangolin birthday
   const getPangolinPairs = async () => {

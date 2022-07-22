@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import NavBar from '../components/Navbar'
 import Mark from '../assets/images/mark-min.png'
 import { useWeb3React } from "@web3-react/core";
-import {useGetChainsBalances} from "../hooks"
+import { useGetWalletChainTokens } from "../hooks"
 
 function Profile() {
     const { account } = useWeb3React();
@@ -12,8 +12,8 @@ function Profile() {
     const [portfolio, setPortfolio] = useState(true)
     const [history, setHistory] = useState(false)
 
-    const {data: balances } = useGetWalletChainTokens(43114)
-    console.log(balances?.total)
+    // 0xc043d71f7455f9e8b65bc037e9252f6fd83849ef
+    const { data: balances } = useGetWalletChainTokens(43114, account)
     return (
         <div className="container">
             <NavBar />
@@ -58,47 +58,37 @@ function Profile() {
                                 {portfolio && (
                                     <>
                                         <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
-                                            <div>
+                                            <div style={{width: '25%', textAlign: 'center'}}>
                                                 Asset
                                             </div>
-                                            <div>
+                                            <div style={{width: '25%', textAlign: 'center'}}>
                                                 Price
                                             </div>
-                                            <div>
-                                                Stake
+                                            <div style={{width: '25%', textAlign: 'center'}}>
+                                                Amount
                                             </div>
-                                            <div>
-                                                Volume
-                                            </div>
-                                        </div>
-                                        <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
-                                            <div>
-                                                BTC
-                                            </div>
-                                            <div>
-                                                $22,000
-                                            </div>
-                                            <div>
-                                                100,394
-                                            </div>
-                                            <div>
-                                                773,994
+                                            <div style={{width: '25%', textAlign: 'center'}}>
+                                                logo
                                             </div>
                                         </div>
-                                        <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
-                                            <div>
-                                                ETH
-                                            </div>
-                                            <div>
-                                                1,546
-                                            </div>
-                                            <div>
-                                                774,093
-                                            </div>
-                                            <div>
-                                                11,299,032
-                                            </div>
-                                        </div>
+                                        {balances && balances.map(balance => {
+                                            return (
+                                                <div key={balance?.symbol} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
+                                                    <div style={{width: '25%', textAlign: 'center'}}>
+                                                        {balance?.token?.symbol}
+                                                    </div>
+                                                    <div style={{width: '25%', textAlign: 'center'}}>
+                                                        ${balance?.price.toString().substring(0,5)}
+                                                    </div>
+                                                    <div style={{width: '25%', textAlign: 'center'}}>
+                                                        ${balance?.amount.toString().substring(0,5)}
+                                                    </div>
+                                                    <div style={{width: '25%', textAlign: 'center'}}>
+                                                        <img src={balance?.logo} width={30} height={30} />
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
                                     </>
                                 )}
                                 {history && (
