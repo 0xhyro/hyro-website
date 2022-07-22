@@ -5,6 +5,8 @@ import Modal from '../components/Modal'
 import { useGetWalletChainTokens } from "../hooks"
 import { useWeb3React } from "@web3-react/core";
 import users from "../store/users.json"
+import axios from 'axios'
+import { ethers } from 'ethers'
 
 export default function User() {
   const { account } = useWeb3React();
@@ -15,6 +17,7 @@ export default function User() {
   const [performance, setPerformance] = useState(false)
   const [portfolio, setPortfolio] = useState(true)
   const [history, setHistory] = useState(false)
+  const [historyData, setHistoryData] = useState({})
 
   if (modal) {
     document.body.classList.add('active-modal')
@@ -27,15 +30,18 @@ export default function User() {
   }
 
   useEffect(() => {
-    const findUser = () => {
-      const found = users.find((user) => (user.id == id))
-      setSingleUser(found)
-    }
-    findUser()
+    setSingleUser(users[id])
   }, [users, id])
+  console.log(singleUser)
 
   // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
   const { data: balances } = useGetWalletChainTokens(137, singleUser?.wallet)
+  useEffect(() => {
+    axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${singleUser?.wallet}&startblock=15026778&endblock=999999999&sort=asc&apikey=M4ARD2Z4QDNPQU5W2ASZY9ASIH74CFYPUY`)
+      .then(res => {
+        setHistoryData(res.data)
+      })
+  }, [singleUser])
   return (
     <div className="container">
       {singleUser &&
@@ -116,13 +122,46 @@ export default function User() {
                           </div>
                         )
                       })}
-                      <div style={{paddingBottom: '50px'}}/>
+                      <div style={{ paddingBottom: '50px' }} />
                     </>
                   )}
-                  {history && (
-                    <div>
-                      history
-                    </div>
+                  {history && historyData && (
+                    <>
+                      <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
+                        <div style={{ width: '25%', textAlign: 'center' }}>
+                          Txn Hash
+                        </div>
+                        <div style={{ width: '25%', textAlign: 'center' }}>
+                          Block
+                        </div>
+                        <div style={{ width: '25%', textAlign: 'center' }}>
+                          Amount
+                        </div>
+                        <div style={{ width: '25%', textAlign: 'center' }}>
+                          Name
+                        </div>
+                      </div>
+                      {historyData && historyData?.result && historyData?.result?.length > 0 ? (historyData?.result?.map((histo, index) => {
+                        return (
+                          <div key={index} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
+                            <div style={{ width: '25%', textAlign: 'center' }}>
+                              {histo?.blockHash?.toString().substring(0, 20)}
+                            </div>
+                            <div style={{ width: '25%', textAlign: 'center' }}>
+                              {histo?.blockNumber}
+                            </div>
+                            <div style={{ width: '25%', textAlign: 'center' }}>
+                              {histo?.value}
+                            </div>
+                            <div style={{ width: '25%', textAlign: 'center' }}>
+                              {histo?.tokenName}
+                            </div>
+                          </div>
+                        )
+                      })) : (
+                        <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
+                      )}
+                    </>
                   )}
                 </>
               )}

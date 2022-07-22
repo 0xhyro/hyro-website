@@ -43,7 +43,7 @@ export default function MainApp() {
             <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', cursor: 'pointer' }}>
               <div style={{ display: 'flex', gap: 20 }}>
                 <div>
-                  {user.id}
+                  {user.id + 1}
                 </div>
                 <div>
                   {user.name}
