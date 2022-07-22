@@ -7,7 +7,7 @@
         "logo": "images/profil1.jpg",
         "followers": "2903",
         "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
-        "wallet": "0xc043d71f7455f9e8b65bc037e9252f6fd83849ef"
+        "wallet": "0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B"
     },
     {
         "id": 2,
@@ -17,7 +17,7 @@
         "logo": "images/profil2.jpg",
         "followers": "23093",
         "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
-        "wallet": "0xc043d71f7455f9e8b65bc037e9252f6fd83849ef"
+        "wallet": "0x46cE2DA01290EA2D1BCED39BbA149d017DF34CB9"
     },
     {
         "id": 3,
@@ -27,7 +27,7 @@
         "logo": "images/profil3.jpg",
         "followers": "29943",
         "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
-        "wallet": "0xc043d71f7455f9e8b65bc037e9252f6fd83849ef"
+        "wallet": "0x876EabF441B2EE5B5b0554Fd502a8E0600950cFa"
     },
     {
         "id": 4,
@@ -37,6 +37,6 @@
         "logo": "images/mark-min.png",
         "followers": "1232",
         "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
-        "wallet": "0xc043d71f7455f9e8b65bc037e9252f6fd83849ef"
+        "wallet": "0xf89d7b9c864f589bbF53a82105107622B35EaA40"
     }
 ]

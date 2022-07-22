@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import NavBar from '../components/Navbar'
 import Modal from '../components/Modal'
+import { useGetWalletChainTokens } from "../hooks"
+import { useWeb3React } from "@web3-react/core";
+import users from "../store/users.json"
 
-export default function User({ users }) {
+export default function User() {
+  const { account } = useWeb3React();
   const { id } = useParams()
   const [singleUser, setSingleUser] = useState([])
   const [modal, setModal] = useState(false)
+  const [transaction, setTransaction] = useState(true)
+  const [performance, setPerformance] = useState(false)
+  const [portfolio, setPortfolio] = useState(true)
+  const [history, setHistory] = useState(false)
 
   if (modal) {
     document.body.classList.add('active-modal')
@@ -24,7 +32,10 @@ export default function User({ users }) {
       setSingleUser(found)
     }
     findUser()
-  }, [id, users])
+  }, [users, id])
+
+  // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
+  const { data: balances } = useGetWalletChainTokens(137, singleUser?.wallet)
   return (
     <div className="container">
       {singleUser &&
@@ -52,8 +63,72 @@ export default function User({ users }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
               <button className='btn-green' onClick={toggleModal}>Invest</button>
-              <button className='btn-gray-outline'>Performances</button>
             </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: '50px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
+                  <button className={transaction ? 'btn-gray' : 'btn-gray-outline'} onClick={() => { setTransaction(true); setPerformance(false); }}>My transactions</button>
+                  <button className={performance ? 'btn-gray' : 'btn-gray-outline'} onClick={() => { setTransaction(false); setPerformance(true); }}>Performances</button>
+                </div>
+                {transaction &&
+                  (
+                    <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
+                      <button className={portfolio ? 'btn-gray' : 'btn-gray-outline'} onClick={() => { setPortfolio(true); setHistory(false); }}>Portfolio</button>
+                      <button className={history ? 'btn-gray' : 'btn-gray-outline'} onClick={() => { setPortfolio(false); setHistory(true); }}>History</button>
+                    </div>
+                  )}
+              </div>
+            </div>
+            {transaction &&
+              (
+                <>
+                  {portfolio && (
+                    <>
+                      <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
+                        <div style={{ width: '25%', textAlign: 'center' }}>
+                          Asset
+                        </div>
+                        <div style={{ width: '25%', textAlign: 'center' }}>
+                          Price
+                        </div>
+                        <div style={{ width: '25%', textAlign: 'center' }}>
+                          Amount
+                        </div>
+                        <div style={{ width: '25%', textAlign: 'center' }}>
+                          logo
+                        </div>
+                      </div>
+                      {balances && balances.map((balance, index) => {
+                        return (
+                          <div key={index} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
+                            <div style={{ width: '25%', textAlign: 'center' }}>
+                              {balance?.token?.symbol}
+                            </div>
+                            <div style={{ width: '25%', textAlign: 'center' }}>
+                              ${balance?.price.toString().substring(0, 5)}
+                            </div>
+                            <div style={{ width: '25%', textAlign: 'center' }}>
+                              ${balance?.amount.toString().substring(0, 10)}
+                            </div>
+                            <div style={{ width: '25%', textAlign: 'center' }}>
+                              <img src={balance?.logo} width={30} height={30} />
+                            </div>
+                          </div>
+                        )
+                      })}
+                      <div style={{paddingBottom: '50px'}}/>
+                    </>
+                  )}
+                  {history && (
+                    <div>
+                      history
+                    </div>
+                  )}
+                </>
+              )}
+            {performance && (
+              <h1>Performance</h1>
+            )}
           </div>
         </>
       }

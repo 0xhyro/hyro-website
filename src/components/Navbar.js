@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Mark from '../assets/images/mark-min.png'
 import Home from '../assets/images/home.png'
 import Bell from '../assets/images/bell.png'
 import Loupe from '../assets/images/loupe.png'
 import User from '../assets/images/user.png'
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useWeb3React } from "@web3-react/core";
 import {
   injected,
@@ -14,6 +14,7 @@ import "../index.scss"
 
 function Navbar() {
   const { account, activate, deactivate, chainId } = useWeb3React();
+  const [isHero, setHero] = useState()
 
   const MetamaskConnector = async () => {
     try {
@@ -23,19 +24,23 @@ function Navbar() {
     }
   };
 
+  useEffect(() => {
+    setHero(true)
+}, [])
+
   return (
     <>
       <nav className="navbar " style={{ borderBottom: '1px solid black' }}>
         <div className="container-fluid">
-          <NavLink exact to="/main-app" className="navbar-brand">
+          <Link exact='true' to="/main-app" className="navbar-brand">
             <h1>Hyro</h1>
-          </NavLink>
-          <NavLink exact to="/main-app" className="navbar-brand">
+          </Link>
+          <Link exact='true' to="/main-app" className="navbar-brand">
             <img src={Home} width="30" height="30" />
-          </NavLink>
-          <NavLink exact to="/my-profile" className="navbar-brand">
+          </Link>
+          <Link exact='true' to="/my-profile" className="navbar-brand">
             <img src={User} width="30" height="30" />
-          </NavLink>
+          </Link>
           <img src={Bell} width="30" height="30" />
           <img src={Loupe} width="30" height="30" />
 

@@ -39,7 +39,7 @@ export default function MainApp() {
       </div>
       {Users.map(user => {
         return (
-          <Link exact to={`/${user.id}`} key={user.id} style={{ textDecoration: 'none', color: 'black' }}>
+          <Link exact='true' to={`/${user.id}`} key={user.id} style={{ textDecoration: 'none', color: 'black' }}>
             <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', cursor: 'pointer' }}>
               <div style={{ display: 'flex', gap: 20 }}>
                 <div>

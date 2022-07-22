@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../components/Navbar'
 import Mark from '../assets/images/mark-min.png'
 import { useWeb3React } from "@web3-react/core";
@@ -8,34 +8,50 @@ function Profile() {
     const { account } = useWeb3React();
     const [transaction, setTransaction] = useState(true)
     const [performance, setPerformance] = useState(false)
+    const [isHero, setHero] = useState()
 
     const [portfolio, setPortfolio] = useState(true)
     const [history, setHistory] = useState(false)
 
-    // 0xc043d71f7455f9e8b65bc037e9252f6fd83849ef
-    const { data: balances } = useGetWalletChainTokens(43114, account)
+    // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
+    const { data: balances } = useGetWalletChainTokens(137, account)
+    useEffect(() => {
+        setHero(true)
+    }, [])
     return (
         <div className="container">
             <NavBar />
             {account ? (
                 <>
                     <div style={{ paddingTop: '30px' }} />
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
-                        <img style={{ borderRadius: '50%' }} src={Mark} width={200} height={200} />
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <h1>
-                                Mark Cuban
-                            </h1>
-                            <div style={{ display: 'flex', gap: 10 }}>
-                                <h3>APR: <span style={{ fontWeight: 100 }}>+207%</span></h3>
-                                <h3>Invested: <span style={{ fontWeight: 100 }}>2,000,343</span></h3>
-                                <h3>Followers: <span style={{ fontWeight: 100 }}>27,304</span></h3>
+                    {isHero ? (
+                        <>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
+                                <img style={{ borderRadius: '50%' }} src={Mark} width={200} height={200} />
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <h1>
+                                        Mark Cuban
+                                    </h1>
+                                    <div style={{ display: 'flex', gap: 10 }}>
+                                        <h3>APR: <span style={{ fontWeight: 100 }}>+207%</span></h3>
+                                        <h3>Invested: <span style={{ fontWeight: 100 }}>2,000,343</span></h3>
+                                        <h3>Followers: <span style={{ fontWeight: 100 }}>27,304</span></h3>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        Mark Cuban Web3 incubator and VC. Digging underground projects and bullish on ETH
-                    </div>
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                Mark Cuban Web3 incubator and VC. Digging underground projects and bullish on ETH
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div style={{ display: 'flex', justifyContent: 'center', flexDirection:'column', alignItems: 'center', gap: 30 }}>
+                                <h2>My address:</h2>
+                                <h3>{account}</h3>
+                            </div>
+                        </>
+                    )}
+
                     <div style={{ paddingTop: '30px' }} />
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: '50px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -58,37 +74,39 @@ function Profile() {
                                 {portfolio && (
                                     <>
                                         <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
-                                            <div style={{width: '25%', textAlign: 'center'}}>
+                                            <div style={{ width: '25%', textAlign: 'center' }}>
                                                 Asset
                                             </div>
-                                            <div style={{width: '25%', textAlign: 'center'}}>
+                                            <div style={{ width: '25%', textAlign: 'center' }}>
                                                 Price
                                             </div>
-                                            <div style={{width: '25%', textAlign: 'center'}}>
+                                            <div style={{ width: '25%', textAlign: 'center' }}>
                                                 Amount
                                             </div>
-                                            <div style={{width: '25%', textAlign: 'center'}}>
+                                            <div style={{ width: '25%', textAlign: 'center' }}>
                                                 logo
                                             </div>
                                         </div>
-                                        {balances && balances.map(balance => {
+                                        {balances && balances.length > 0 ? (balances.map(balance => {
                                             return (
                                                 <div key={balance?.symbol} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
-                                                    <div style={{width: '25%', textAlign: 'center'}}>
+                                                    <div style={{ width: '25%', textAlign: 'center' }}>
                                                         {balance?.token?.symbol}
                                                     </div>
-                                                    <div style={{width: '25%', textAlign: 'center'}}>
-                                                        ${balance?.price.toString().substring(0,5)}
+                                                    <div style={{ width: '25%', textAlign: 'center' }}>
+                                                        ${balance?.price.toString().substring(0, 5)}
                                                     </div>
-                                                    <div style={{width: '25%', textAlign: 'center'}}>
-                                                        ${balance?.amount.toString().substring(0,5)}
+                                                    <div style={{ width: '25%', textAlign: 'center' }}>
+                                                        ${balance?.amount.toString().substring(0, 10)}
                                                     </div>
-                                                    <div style={{width: '25%', textAlign: 'center'}}>
+                                                    <div style={{ width: '25%', textAlign: 'center' }}>
                                                         <img src={balance?.logo} width={30} height={30} />
                                                     </div>
                                                 </div>
                                             )
-                                        })}
+                                        })) : (
+                                            <h1 style={{textAlign: 'center'}}>No data on Polygon</h1>
+                                        )}
                                     </>
                                 )}
                                 {history && (

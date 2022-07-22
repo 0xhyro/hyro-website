@@ -8,7 +8,6 @@ function Modal({ toggleModal }) {
     function handleClick() {
         setAmount(inputRef.current.value);
     }
-    console.log(amount)
     return (
         <>
             <div className='modal' style={{ display: "flex" }} >

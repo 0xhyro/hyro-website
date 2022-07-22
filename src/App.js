@@ -4,10 +4,8 @@ import Home from './pages/Home'
 import User from './pages/User'
 import MainApp from './pages/MainApp'
 import Profile from './pages/Profile'
-
 import { Web3Provider } from '@ethersproject/providers';
 import { Web3ReactProvider } from '@web3-react/core';
-import Users from "./store/users.json"
 
 function App() {
   const getLibrary = (provider) => {
@@ -19,14 +17,11 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Web3ReactProvider getLibrary={getLibrary} >
-          <Route exact path="/" component={Home} />
-          <Route exact path="/main-app" component={MainApp} />
-          <Route exact path="/my-profile" component={Profile} />
-          <Route path="/:id">
-            <User users={Users} />
-          </Route>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/main-app" component={MainApp} />
+            <Route exact path="/my-profile" component={Profile} />
+            <Route path="/:id" component={User} />
         </Web3ReactProvider>
-        <Redirect to="/" />
       </Switch>
     </BrowserRouter>
   );
