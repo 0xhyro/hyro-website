@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import NavBar from '../components/Navbar'
 import Mark from '../assets/images/mark-min.png'
 import { useWeb3React } from "@web3-react/core";
+import {useGetChainsBalances} from "../hooks"
 
 function Profile() {
     const { account } = useWeb3React();
@@ -11,6 +12,8 @@ function Profile() {
     const [portfolio, setPortfolio] = useState(true)
     const [history, setHistory] = useState(false)
 
+    const {data: balances } = useGetWalletChainTokens(43114)
+    console.log(balances?.total)
     return (
         <div className="container">
             <NavBar />
