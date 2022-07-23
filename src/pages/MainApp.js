@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import NavBar from '../components/Navbar'
 import Users from '../store/users.json'
 import { Link } from 'react-router-dom'
 
 export default function MainApp() {
-  const [color, setColor] = useState("")
-
 
   // const redOrGreen = (word) => {
   //   word.charAt(0) === '-' ? setColor('red') : setColor('green')

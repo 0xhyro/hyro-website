@@ -3,13 +3,10 @@ import { useParams } from 'react-router-dom'
 import NavBar from '../components/Navbar'
 import Modal from '../components/Modal'
 import { useGetWalletChainTokens } from "../hooks"
-import { useWeb3React } from "@web3-react/core";
 import users from "../store/users.json"
 import axios from 'axios'
-import { ethers } from 'ethers'
 
 export default function User() {
-  const { account } = useWeb3React();
   const { id } = useParams()
   const [singleUser, setSingleUser] = useState([])
   const [modal, setModal] = useState(false)
@@ -31,7 +28,7 @@ export default function User() {
 
   useEffect(() => {
     setSingleUser(users[id])
-  }, [users, id])
+  }, [id])
 
   // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
   const { data: balances } = useGetWalletChainTokens(137, singleUser?.wallet)
@@ -41,9 +38,7 @@ export default function User() {
         setHistoryData(res.data)
       })
   }, [singleUser, history, balances])
-
-  console.log('historyData.message',historyData?.message)
-  console.log('historyData',historyData)
+  // historyData && console.log(historyData)
 
   return (
     <div className="container">
@@ -53,7 +48,7 @@ export default function User() {
           {modal && <Modal toggleModal={toggleModal} />}
           <div style={{ paddingTop: '30px' }} />
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
-            <img style={{ borderRadius: '50%' }} src={singleUser.logo} width={200} height={200} />
+            <img alt='user' style={{ borderRadius: '50%' }} src={singleUser.logo} width={200} height={200} />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <h1>
                 {singleUser.name}
@@ -120,7 +115,7 @@ export default function User() {
                               ${balance?.amount.toString().substring(0, 10)}
                             </div>
                             <div style={{ width: '25%', textAlign: 'center' }}>
-                              <img src={balance?.logo} width={30} height={30} />
+                              <img alt='logo' src={balance?.logo} width={30} height={30} />
                             </div>
                           </div>
                         )
@@ -154,6 +149,7 @@ export default function User() {
                               {histo?.blockNumber}
                             </div>
                             <div style={{ width: '25%', textAlign: 'center' }}>
+                              {/* {ethers.utils.parseUnits(histo?.value, histo?.tokenDecimal)} */}
                               {histo?.value}
                             </div>
                             <div style={{ width: '25%', textAlign: 'center' }}>
