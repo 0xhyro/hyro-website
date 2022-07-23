@@ -89,6 +89,13 @@ h1 {
     color: white;
     cursor: pointer;
     font-family: 'bold';
+    transition: 0.3s;
+}
+
+.btn-green:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
 }
 
 .btn-gray {
@@ -104,15 +111,6 @@ h1 {
 }
 
 .btn-gray:hover {
-    background-color: #eaeaea;
-    padding: 15px 100px 15px 100px;
-    border-radius: 10px;
-    border: none;
-    color: black;
-    cursor: pointer;
-    box-shadow: 5px 5px 5px #D9D9D9;
-    width: 400px;
-    font-family: 'bold';
     transform: scale(1.01);
 }
 
@@ -129,27 +127,24 @@ h1 {
 }
 
 .btn-gray-outline:hover {
-    background-color: #FFF;
-    padding: 15px 100px 15px 100px;
-    border-radius: 10px;
-    border: none;
-    color: black;
-    cursor: pointer;
-    width: 400px;
-    box-shadow: 5px 5px 5px #D9D9D9;
-    font-family: 'bold';
     transform: scale(1.01);
 }
 
 .btn-black {
-    background-color: #000;
-    padding: 15px;
+    background-color: white;
+    padding: 15px 15px 15px 15px;
     border-radius: 10px;
     border: none;
-    color: white;
-    font-family: 'bold';
-
+    color: black;
     cursor: pointer;
+    font-family: 'bold';
+    border: 1px solid black;
+    transition: 0.3s;
+}
+
+.btn-black:hover {
+    background-color: black;
+    color: white;
 }
 
 .btn-black-sm {
@@ -181,12 +176,6 @@ h1 {
 }
 
 .row-display-click:hover {
-    border-bottom: 1px solid;
-    padding: 10px;
-    display: flex;
-    gap: 20;
-    justify-content: space-between;
-    cursor: pointer;
     font-family: 'bold';
     color: black;
 }

@@ -19,7 +19,7 @@ export default function MainApp() {
       <NavBar />
       <div style={{ paddingTop: '30px' }} />
       <h1 style={{textAlign: 'center', fontSize: '4em'}}>Welcome to Hyro</h1>
-      <h3 style={{textAlign: 'center'}}>From <span style={{fontFamily: 'bold'}}>Zyro</span> to <span style={{ fontFamily: 'bold'}}>Hyro</span>.</h3>
+      <h3 style={{textAlign: 'center'}}>From <span style={{fontFamily: 'bold', color: '#6e6e6e'}}>Zyro</span> to <span style={{ fontFamily: 'bold'}}>Hyro</span>.</h3>
       <div style={{ paddingTop: '30px' }} />
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <img alt='loupe' src={Loupe} width={25} height={25} />
