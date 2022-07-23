@@ -5,6 +5,7 @@ import Modal from '../components/Modal'
 import { useGetWalletChainTokens } from "../hooks"
 import users from "../store/users.json"
 import axios from 'axios'
+import Chart from '../components/Chart'
 
 export default function User() {
   const { id } = useParams()
@@ -171,6 +172,7 @@ export default function User() {
             {performance && (
               <>
                 <h1 style={{ textAlign: 'center' }}>Performance</h1>
+                <Chart />
               </>
             )}
           </div>

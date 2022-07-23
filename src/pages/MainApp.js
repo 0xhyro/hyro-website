@@ -36,7 +36,7 @@ export default function MainApp() {
       <h1 style={{ textAlign: 'center' }}>Hyro Leader board</h1>
       <div style={{ boxShadow: '5px 5px 5px #D9D9D9', borderRadius: '15px', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', alignItems: 'center', fontWeight: 700, fontSize: "1.5em", backgroundColor: '#eaeaea' }}>
         <div style={{ width: '25%', textAlign: 'center' }}>
-          Id
+          User
         </div>
         <div style={{ width: '25%', textAlign: 'center' }}>
           Name
@@ -53,8 +53,8 @@ export default function MainApp() {
         return (
           <Link exact='true' to={`/${user.id}`} key={user.id} style={{ textDecoration: 'none', color: 'black' }}>
             <div className='row-display-click'>
-              <div style={{ width: '25%', textAlign: 'center' }}>
-                {user.id + 1}
+            <div style={{ width: '25%', textAlign: 'center' }}>
+              <img style={{borderRadius: '50%'}} alt='logo' src={user?.logo} width={50} height={50} />
               </div>
               <div style={{ width: '25%', textAlign: 'center' }}>
                 {user.name}
