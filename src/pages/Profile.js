@@ -4,6 +4,7 @@ import Mark from '../assets/images/mark-min.png'
 import { useWeb3React } from "@web3-react/core";
 import { useGetWalletChainTokens } from "../hooks"
 import axios from 'axios'
+import HyroFormModal from '../components/HyroFormModal'
 
 function Profile() {
     const { account } = useWeb3React();
@@ -13,6 +14,7 @@ function Profile() {
     const [historyData, setHistoryData] = useState({})
     const [portfolio, setPortfolio] = useState(true)
     const [history, setHistory] = useState(false)
+    const [modal, setModal] = useState(false)
 
     // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
     const { data: balances } = useGetWalletChainTokens(137, account)
@@ -26,9 +28,14 @@ function Profile() {
                 setHistoryData(res.data)
             })
     }, [history, balances, account])
+
+    const toggleModal = () => {
+        setModal(!modal)
+      }
     return (
         <div className="container">
             <NavBar />
+            {modal && <HyroFormModal toggleModal={toggleModal} />}
             {account ? (
                 <>
                     {isHero ? (
@@ -66,6 +73,14 @@ function Profile() {
                     )}
 
                     <div style={{ paddingTop: '30px' }} />
+                    {!isHero && (
+                        <>
+                            <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
+                                <button className='btn-green' onClick={toggleModal}>Become a Hyro</button>
+                            </div>
+                            <div style={{ paddingTop: '30px' }} />
+                        </>
+                    )}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: '50px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                             <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
@@ -159,21 +174,21 @@ function Profile() {
                                         })) : (
                                             <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
                                         )}
-                                        </>
-                                      )}
                                     </>
                                 )}
-                                {performance && (
-                                    <h1>Performance</h1>
-                                )}
                             </>
-                        ) : (
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
-                        <h1>Please Connect your wallet</h1>
-                    </div>
-            )}
+                        )}
+                    {performance && (
+                        <h1>Performance</h1>
+                    )}
+                </>
+            ) : (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+                    <h1>Please Connect your wallet</h1>
                 </div>
-            )
+            )}
+        </div>
+    )
 }
 
-            export default Profile
+export default Profile
