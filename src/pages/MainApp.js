@@ -18,18 +18,20 @@ export default function MainApp() {
     <div className="container">
       <NavBar />
       <div style={{ paddingTop: '30px' }} />
-      <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
-
-      <img alt='loupe' src={Loupe} width={25} height={25} />
-      <input
-        onChange={e => setQuery(e.target.value)}
-        type="text"
-        id="search"
-        name="search"
-        placeholder="Search a hyro"
-        style={{ padding: '10px', width: '100%', borderRadius: '5px', backgroundColor: '#EAEAEA' }}
+      <h1 style={{textAlign: 'center', fontSize: '4em'}}>Welcome to Hyro</h1>
+      <h3 style={{textAlign: 'center'}}>From <span style={{color: 'red', fontFamily: 'bold'}}>Zyro</span> to <span style={{color: '#3A833A', fontFamily: 'bold'}}>Hyro</span>.</h3>
+      <div style={{ paddingTop: '30px' }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <img alt='loupe' src={Loupe} width={25} height={25} />
+        <input
+          onChange={e => setQuery(e.target.value)}
+          type="text"
+          id="search"
+          name="search"
+          placeholder="Search a hyro"
+          style={{ padding: '10px', width: '100%', borderRadius: '5px', backgroundColor: '#EAEAEA' }}
         />
-        </div>
+      </div>
       <div style={{ paddingTop: '30px' }} />
       <h1 style={{ textAlign: 'center' }}>Hyro Leader board</h1>
       <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', fontWeight: 700, fontSize: "1.5em" }}>
