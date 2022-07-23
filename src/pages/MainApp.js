@@ -22,22 +22,18 @@ export default function MainApp() {
       <div style={{ paddingTop: '30px' }} />
       <input type="text" id="search" name="search" placeholder="Search" style={{ padding: '10px', width: '100%', borderRadius: '5px', backgroundColor: '#EAEAEA' }} />
       <div style={{ paddingTop: '30px' }} />
-      <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', gap: 20 }}>
-          <div>
-            Id
-          </div>
-          <div>
-            Name
-          </div>
+      <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', fontWeight: 700, fontSize: "1.5em" }}>
+        <div style={{ width: '25%', textAlign: 'center' }}>
+          Id
         </div>
-        <div style={{ display: 'flex', gap: 20 }}>
-          <div>
-            Invested
-          </div>
-          <div>
-            APR
-          </div>
+        <div style={{ width: '25%', textAlign: 'center' }}>
+          Name
+        </div>
+        <div style={{ width: '25%', textAlign: 'center' }}>
+          Invested
+        </div>
+        <div style={{ width: '25%', textAlign: 'center' }}>
+          APR
         </div>
       </div>
       {Users.map(user => {
@@ -45,21 +41,17 @@ export default function MainApp() {
         return (
           <Link exact='true' to={`/${user.id}`} key={user.id} style={{ textDecoration: 'none', color: 'black' }}>
             <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', cursor: 'pointer' }}>
-              <div style={{ display: 'flex', gap: 20 }}>
-                <div>
-                  {user.id + 1}
-                </div>
-                <div>
-                  {user.name}
-                </div>
+              <div style={{ width: '25%', textAlign: 'center' }}>
+                {user.id + 1}
               </div>
-              <div style={{ display: 'flex', gap: 20 }}>
-                <div>
-                  {user.invested}
-                </div>
-                <div style={{color: pColor}}>
-                  {user.apr}
-                </div>
+              <div style={{ width: '25%', textAlign: 'center' }}>
+                {user.name}
+              </div>
+              <div style={{ width: '25%', textAlign: 'center' }}>
+                {user.invested}
+              </div>
+              <div style={{ color: pColor, width: '25%', textAlign: 'center' }}>
+                {user.apr}
               </div>
             </div>
           </Link>

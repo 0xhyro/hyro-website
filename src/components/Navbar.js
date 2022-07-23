@@ -33,7 +33,7 @@ function Navbar() {
       <nav className="navbar " style={{ borderBottom: '1px solid black' }}>
         <div className="container-fluid">
           <Link exact='true' to="/main-app" className="navbar-brand">
-            <h1>Hyro</h1>
+            <h1 style={{fontWeight: 700}}>Hyro</h1>
           </Link>
           <Link exact='true' to="/main-app" className="navbar-brand">
             <img src={Home} width="30" height="30" />

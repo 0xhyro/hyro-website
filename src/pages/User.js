@@ -41,6 +41,10 @@ export default function User() {
         setHistoryData(res.data)
       })
   }, [singleUser, history, balances])
+
+  console.log('historyData.message',historyData?.message)
+  console.log('historyData',historyData)
+
   return (
     <div className="container">
       {singleUser &&
@@ -140,7 +144,7 @@ export default function User() {
                           Name
                         </div>
                       </div>
-                      {historyData && historyData?.result?.length > 0 ? (historyData?.result?.map((histo, index) => {
+                      {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.map((histo, index) => {
                         return (
                           <div key={index} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
                             <div style={{ width: '25%', textAlign: 'center' }}>
