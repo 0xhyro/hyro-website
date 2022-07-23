@@ -60,7 +60,7 @@ export default function User() {
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '30px' }}>
             {singleUser.description}
           </div>
           <div style={{ paddingTop: '30px' }} />
@@ -104,7 +104,7 @@ export default function User() {
                       </div>
                       {balances && balances.map((balance, index) => {
                         return (
-                          <div key={index} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
+                          <div key={index} className='row-display'>
                             <div style={{ width: '25%', textAlign: 'center' }}>
                               {balance?.token?.symbol}
                             </div>
@@ -112,7 +112,7 @@ export default function User() {
                               ${balance?.price.toString().substring(0, 5)}
                             </div>
                             <div style={{ width: '25%', textAlign: 'center' }}>
-                              ${balance?.amount.toString().substring(0, 10)}
+                              ${balance?.amount.toLocaleString('en-US')}
                             </div>
                             <div style={{ width: '25%', textAlign: 'center' }}>
                               <img alt='logo' src={balance?.logo} width={30} height={30} />
@@ -141,7 +141,7 @@ export default function User() {
                       </div>
                       {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.map((histo, index) => {
                         return (
-                          <div key={index} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
+                          <div key={index} className='row-display'>
                             <div style={{ width: '25%', textAlign: 'center' }}>
                               {histo?.blockHash?.toString().substring(0, 20)}
                             </div>

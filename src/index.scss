@@ -1,25 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;400;700&display=swap');
 
+@font-face {
+    font-family: "light";
+    src: local("BasierCircle-Regular"),
+        url("./fonts/BasierCircle-Regular.woff") format("woff")
+}
+
+@font-face {
+    font-family: "bold";
+    src: local("BasierCircle-Regular"),
+        url("./fonts/BasierCircle-Bold.woff") format("woff")
+}
+
 p {
     font-size: 1.2em;
     color: #000;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'light', sans-serif;
 }
 
 h1 {
     color: #000;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'bold', sans-serif;
 }
-
-div {
-    font-family: 'Outfit', sans-serif;
-}
-
-li {
-    color: #1c0531;
-    font-family: 'Outfit', sans-serif;
-}
-
 
 .blur {
     backdrop-filter: blur(3px);
@@ -82,8 +84,8 @@ li {
 .btn-green {
     background-color: #3A833A;
     padding: 15px 100px 15px 100px;
-    border-radius: 10px; 
-    border: none; 
+    border-radius: 10px;
+    border: none;
     color: white;
     cursor: pointer;
 }
@@ -91,8 +93,8 @@ li {
 .btn-gray {
     background-color: #D9D9D9;
     padding: 15px 100px 15px 100px;
-    border-radius: 10px; 
-    border: none; 
+    border-radius: 10px;
+    border: none;
     color: black;
     cursor: pointer;
     width: 400px;
@@ -101,7 +103,7 @@ li {
 .btn-gray-outline {
     background-color: #FFF;
     padding: 15px 100px 15px 100px;
-    border-radius: 10px; 
+    border-radius: 10px;
     border: 1px solid #D9D9D9;
     color: black;
     cursor: pointer;
@@ -112,8 +114,8 @@ li {
 .btn-black {
     background-color: #000;
     padding: 15px;
-    border-radius: 10px; 
-    border: none; 
+    border-radius: 10px;
+    border: none;
     color: white;
     cursor: pointer;
 }
@@ -121,8 +123,33 @@ li {
 .btn-black-sm {
     background-color: #000;
     padding: 5px;
-    border-radius: 10px; 
-    border: none; 
+    border-radius: 10px;
+    border: none;
     color: white;
     cursor: pointer;
+}
+.row-display {
+    border-bottom: 1px solid;
+    padding: 10px;
+    display: flex;
+    gap: 20;
+    justify-content: space-between;
+}
+.row-display-click {
+    border-bottom: 1px solid;
+    padding: 10px;
+    display: flex;
+    gap: 20;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.row-display-click:hover {
+    border-bottom: 1px solid;
+    padding: 10px;
+    display: flex;
+    gap: 20;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: 'bold';
 }

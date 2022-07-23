@@ -1,7 +1,6 @@
 import React from 'react'
 import Home from '../assets/images/home.png'
 import Bell from '../assets/images/bell.png'
-import Loupe from '../assets/images/loupe.png'
 import User from '../assets/images/user.png'
 import { Link } from 'react-router-dom';
 import { useWeb3React } from "@web3-react/core";
@@ -36,8 +35,6 @@ function Navbar() {
             <img alt="user" src={User} width="30" height="30" />
           </Link>
           <img alt="bell" src={Bell} width="30" height="30" />
-          <img alt="loupe" src={Loupe} width="30" height="30" />
-
           {account ? (
             <>
               {chainId !== 1 ? (

@@ -117,7 +117,7 @@ function Profile() {
                                         </div>
                                         {balances && balances.length > 0 ? (balances.map(balance => {
                                             return (
-                                                <div key={balance?.symbol} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
+                                                <div key={balance?.symbol} className='row-display'>
                                                     <div style={{ width: '25%', textAlign: 'center' }}>
                                                         {balance?.token?.symbol}
                                                     </div>
@@ -155,7 +155,7 @@ function Profile() {
                                         </div>
                                         {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.map((histo, index) => {
                                             return (
-                                                <div key={index} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
+                                                <div key={index} className='row-display'>
                                                     <div style={{ width: '25%', textAlign: 'center' }}>
                                                         {histo?.blockHash?.toString().substring(0, 20)}
                                                     </div>
