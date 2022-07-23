@@ -77,7 +77,7 @@ function Profile() {
                     {!isHero && (
                         <>
                             <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
-                                <button className='btn-green' onClick={toggleModal}>Become a Hyro</button>
+                                <button  style={{padding: '15px 100px 15px 100px'}} className='btn-green' onClick={toggleModal}>Become a Hyro</button>
                             </div>
                             <div style={{ paddingTop: '30px' }} />
                         </>

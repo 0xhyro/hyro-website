@@ -14,7 +14,7 @@ function Hero() {
             <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', textAlign: 'center', width: '50%', gap: 10 }}>
                 <div style={{ width: '100%' }}>
                     <NavLink exact to="/main-app">
-                        <button style={{ width: '50%' }} className='btn-black'>Launch App</button>
+                        <button style={{ width: '50%' }} className='btn-green'>Launch App</button>
                     </NavLink>
                 </div>
                 <div style={{ width: '100%', display: 'flex', gap: 10, justifyContent: 'center' }}>

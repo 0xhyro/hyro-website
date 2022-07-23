@@ -83,7 +83,7 @@ h1 {
 
 .btn-green {
     background-color: black;
-    padding: 15px 100px 15px 100px;
+    padding: 15px 15px 15px 15px;
     border-radius: 10px;
     border: none;
     color: white;
@@ -158,26 +158,35 @@ h1 {
 
 }
 .row-display {
-    border-bottom: 1px solid;
     padding: 10px;
     display: flex;
     gap: 20;
     justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    box-shadow: 5px 5px 5px #D9D9D9;
+    border-radius: 15px;
+    min-height: 70px;
 }
 .row-display-click {
-    border-bottom: 1px solid;
     padding: 10px;
     display: flex;
     gap: 20;
     justify-content: space-between;
+    align-items: center;
     cursor: pointer;
     text-decoration: none;
     color: black;
+    box-shadow: 5px 5px 5px #D9D9D9;
+    border-radius: 15px;
+    min-height: 70px;
 }
 
 .row-display-click:hover {
     font-family: 'bold';
     color: black;
+    transform: scale(1.01);
 }
 
 .underline {

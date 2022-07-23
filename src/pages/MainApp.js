@@ -28,13 +28,13 @@ export default function MainApp() {
           type="text"
           id="search"
           name="search"
-          placeholder="Search a hyro"
+          placeholder="Search your Hyro"
           style={{ padding: '10px', width: '100%', borderRadius: '5px', backgroundColor: '#EAEAEA' }}
         />
       </div>
       <div style={{ paddingTop: '30px' }} />
       <h1 style={{ textAlign: 'center' }}>Hyro Leader board</h1>
-      <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', fontWeight: 700, fontSize: "1.5em" }}>
+      <div style={{ boxShadow: '5px 5px 5px #D9D9D9', borderRadius: '15px', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', alignItems: 'center', fontWeight: 700, fontSize: "1.5em", backgroundColor: '#eaeaea' }}>
         <div style={{ width: '25%', textAlign: 'center' }}>
           Id
         </div>
@@ -70,6 +70,7 @@ export default function MainApp() {
         )
       }
       )}
+      <div style={{ paddingTop: '30px' }} />
     </div>
   )
 }
