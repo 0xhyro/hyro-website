@@ -5,6 +5,8 @@ import { useWeb3React } from "@web3-react/core";
 import { useGetWalletChainTokens } from "../hooks"
 import axios from 'axios'
 import HyroFormModal from '../components/HyroFormModal'
+import Chart from '../components/Chart'
+import {MAINNET, TESTNET} from '../store/constant'
 
 function Profile() {
     const { account } = useWeb3React();
@@ -18,7 +20,7 @@ function Profile() {
     const [addressHyro, setAddressHyro] = useState("0")
 
     // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
-    const { data: balances } = useGetWalletChainTokens(137, account)
+    const { data: balances } = useGetWalletChainTokens(MAINNET, account)
     useEffect(() => {
         setHero(false)
     }, [])
@@ -69,8 +71,8 @@ function Profile() {
                             <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: 30 }}>
                                 <h2>My address:</h2>
                                 <h3>
-                                    <a rel="noopener noreferrer" target="_blank" style={{textDecoration: 'none', color: 'black'}} href={`https://polygonscan.com/address/${account}`}>{account.substring(0, 9)}...
-                                    {account.slice(account.length - 9)}</a></h3>
+                                    <a rel="noopener noreferrer" target="_blank" style={{ textDecoration: 'none', color: 'black' }} href={`https://polygonscan.com/address/${account}`}>{account.substring(0, 9)}...
+                                        {account.slice(account.length - 9)}</a></h3>
 
                             </div>
                         </>
@@ -184,7 +186,10 @@ function Profile() {
                             </>
                         )}
                     {performance && (
-                        <h1 style={{ textAlign: 'center' }}>Performance</h1>
+                        <>
+                            <h1 style={{ textAlign: 'center' }}>Performance</h1>
+                            <Chart />
+                        </>
                     )}
                 </>
             ) : (

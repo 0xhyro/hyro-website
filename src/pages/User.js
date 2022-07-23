@@ -6,6 +6,7 @@ import { useGetWalletChainTokens } from "../hooks"
 import users from "../store/users.json"
 import axios from 'axios'
 import Chart from '../components/Chart'
+import {MAINNET, TESTNET} from '../store/constant'
 
 export default function User() {
   const { id } = useParams()
@@ -32,8 +33,7 @@ export default function User() {
     setSingleUser(users[id])
   }, [id])
 
-  // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
-  const { data: balances } = useGetWalletChainTokens(137, singleUser?.wallet)
+  const { data: balances } = useGetWalletChainTokens(MAINNET, singleUser?.wallet)
   useEffect(() => {
     axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${singleUser?.wallet}&startblock=15026778&endblock=999999999&sort=asc&apikey=M4ARD2Z4QDNPQU5W2ASZY9ASIH74CFYPUY`)
       .then(res => {

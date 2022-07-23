@@ -15,9 +15,9 @@ function HyroFormModal({ toggleModal, setAddressHyro }) {
                 <div className='main-content' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                     <h1 style={{textAlign: 'center'}}>Become a Hyro today!</h1>
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
-                        <div style={{ display: 'flex', gap: 20, alignItems: 'baseline', justifyContent: 'center' }}>
+                        <div style={{ }}>
                             <p style={{ textAlign: 'center' }}>Address</p>
-                            <input ref={inputRef} type="text" id="address" name="address" placeholder="0x..." style={{ padding: '10px', borderRadius: '5px', backgroundColor: '#EAEAEA' }} />
+                            <input ref={inputRef} type="text" id="address" name="address" placeholder="0x..." style={{ width: '100%', padding: '10px', borderRadius: '5px', backgroundColor: '#EAEAEA' }} />
                         </div>
                         <button onClick={handleClick} className='btn-green'>Join</button>
                     </div>
