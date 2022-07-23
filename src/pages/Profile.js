@@ -49,7 +49,7 @@ function Profile() {
                 IS_HUMAN_POLY_ABI,
                 provider.getSigner()
             );
-            await contract.sendToEth(1, "0x00000000000000000000000060380f4ca9a744f1cd1614856bf0612360e4e1cf", account)
+            await contract.sendToEth(1, "0x00000000000000000000000060380F4Ca9A744f1Cd1614856bf0612360E4E1cF", account)
         }
         hasClicked && createMyHyro().catch(console.error)
     }, [hasClicked])
