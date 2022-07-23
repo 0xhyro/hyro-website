@@ -102,7 +102,7 @@ function Profile() {
                             <>
                                 {portfolio && (
                                     <>
-                                        <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
+                                        <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#eaeaea' }}>
                                             <div style={{ width: '25%', textAlign: 'center' }}>
                                                 Asset
                                             </div>
@@ -140,7 +140,7 @@ function Profile() {
                                 )}
                                 {history && historyData && (
                                     <>
-                                        <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
+                                        <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#eaeaea' }}>
                                             <div style={{ width: '25%', textAlign: 'center' }}>
                                                 Txn Hash
                                             </div>

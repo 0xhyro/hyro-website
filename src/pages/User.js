@@ -89,7 +89,7 @@ export default function User() {
                   {portfolio && (
                     <>
                       <h1 style={{ textAlign: 'center' }}>Portfolio</h1>
-                      <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
+                      <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#eaeaea' }}>
                         <div style={{ width: '25%', textAlign: 'center' }}>
                           Asset
                         </div>
@@ -127,7 +127,7 @@ export default function User() {
                   {history && historyData && (
                     <>
                       <h1 style={{ textAlign: 'center' }}>History</h1>
-                      <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
+                      <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#eaeaea' }}>
                         <div style={{ width: '25%', textAlign: 'center' }}>
                           Txn Hash
                         </div>
