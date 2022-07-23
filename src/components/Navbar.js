@@ -11,11 +11,19 @@ import {
 import "../index.scss"
 
 function Navbar() {
-  const { account, activate, chainId } = useWeb3React();
+  const { account, activate, chainId, deactivate } = useWeb3React();
 
   const MetamaskConnector = async () => {
     try {
       await activate(injected);
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
+  const disconnect = () => {
+    try {
+      deactivate();
     } catch (ex) {
       console.log(ex);
     }
@@ -43,7 +51,7 @@ function Navbar() {
               {chainId !== 1 ? (
                 <span className="navbar-text text-danger" style={{ border: '1px solid', padding: '10px', borderRadius: "5px" }}>Change chain to Polygon</span>
               ) : (
-                <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '20px', alignItems: 'center', cursor: 'pointer' }} onClick={disconnect}>
                   <p style={{ marginTop: '20px' }}>
                     Connected with {account.substring(0, 5)}...
                     {account.slice(account.length - 4)}

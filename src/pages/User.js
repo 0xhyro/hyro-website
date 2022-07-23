@@ -66,8 +66,10 @@ export default function User() {
           <div style={{ paddingTop: '30px' }} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
-              <button style={{padding: '15px 100px 15px 100px'}} className='btn-green' onClick={toggleModal}>Invest</button>
+              <button style={{ padding: '15px 100px 15px 100px' }} className='btn-green' onClick={toggleModal}>Invest</button>
             </div>
+            <div style={{ paddingBottom: '30px', borderBottom: '1px solid black' }} />
+            <div style={{ paddingTop: '30px' }} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingBottom: '50px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
@@ -89,7 +91,7 @@ export default function User() {
                   {portfolio && (
                     <>
                       <h1 style={{ textAlign: 'center' }}>Portfolio</h1>
-                      <div style={{boxShadow: '5px 5px 5px #D9D9D9', borderRadius: '15px', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', alignItems: 'center', fontWeight: 700, fontSize: "1.5em", backgroundColor: '#eaeaea'  }}>
+                      <div style={{ boxShadow: '5px 5px 5px #D9D9D9', borderRadius: '15px', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', alignItems: 'center', fontWeight: 700, fontSize: "1.5em", backgroundColor: '#eaeaea' }}>
                         <div style={{ width: '25%', textAlign: 'center' }}>
                           Asset
                         </div>
@@ -127,7 +129,7 @@ export default function User() {
                   {history && historyData && (
                     <>
                       <h1 style={{ textAlign: 'center' }}>History</h1>
-                      <div style={{ boxShadow: '5px 5px 5px #D9D9D9', borderRadius: '15px', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', alignItems: 'center', fontWeight: 700, fontSize: "1.5em", backgroundColor: '#eaeaea'  }}>
+                      <div style={{ boxShadow: '5px 5px 5px #D9D9D9', borderRadius: '15px', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', alignItems: 'center', fontWeight: 700, fontSize: "1.5em", backgroundColor: '#eaeaea' }}>
                         <div style={{ width: '25%', textAlign: 'center' }}>
                           Txn Hash
                         </div>

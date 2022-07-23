@@ -77,8 +77,9 @@ function Profile() {
                     {!isHero && (
                         <>
                             <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
-                                <button  style={{padding: '15px 100px 15px 100px'}} className='btn-green' onClick={toggleModal}>Become a Hyro</button>
+                                <button style={{ padding: '15px 100px 15px 100px' }} className='btn-green' onClick={toggleModal}>Become a Hyro</button>
                             </div>
+                            <div style={{ paddingBottom: '30px', borderBottom: '1px solid black' }} />
                             <div style={{ paddingTop: '30px' }} />
                         </>
                     )}
@@ -180,7 +181,7 @@ function Profile() {
                             </>
                         )}
                     {performance && (
-                        <h1>Performance</h1>
+                        <h1 style={{ textAlign: 'center' }}>Performance</h1>
                     )}
                 </>
             ) : (

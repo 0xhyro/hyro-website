@@ -29,7 +29,7 @@ export default function MainApp() {
           id="search"
           name="search"
           placeholder="Search your Hyro"
-          style={{ padding: '10px', width: '100%', borderRadius: '5px', backgroundColor: '#EAEAEA' }}
+          style={{ padding: '10px', width: '100%', borderRadius: '5px', backgroundColor: '#FFF' }}
         />
       </div>
       <div style={{ paddingTop: '30px' }} />
