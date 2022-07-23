@@ -12,7 +12,7 @@ const RPC_URLS = {
 
 //metamask
 export const injected = new InjectedConnector({
-	supportedChainIds: [ 1, 4, 31337, 43114, 56, 250, 137, 1285, 1284, ]
+	supportedChainIds: [ 1, 4, 31337, 43114, 56, 250, 137, 1285, 1284, 80001 ]
 });
 
 
@@ -20,7 +20,7 @@ export const injected = new InjectedConnector({
 //coinbase
 export const walletlink = new WalletLinkConnector({
 	url: RPC_URLS[1],
-	supportedChainIds: [ 1, 4 ]
+	supportedChainIds: [ 137, 80001 ]
 });
 
 export const walletConnect = new WalletConnectConnector({

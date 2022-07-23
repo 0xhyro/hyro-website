@@ -9,11 +9,10 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();
 
-
 ReactDOM.render(
   <ContextProvider>
     <QueryClientProvider client={queryClient}>
       <App />
-      </QueryClientProvider>
-  </ContextProvider>, 
+    </QueryClientProvider>
+  </ContextProvider>,
   document.getElementById('root'));

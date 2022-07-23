@@ -6,7 +6,10 @@ import { useGetWalletChainTokens } from "../hooks"
 import users from "../store/users.json"
 import axios from 'axios'
 import Chart from '../components/Chart'
-import {MAINNET, TESTNET} from '../store/constant'
+import { MAINNET, TESTNET, FACTORY_ADDRESS } from '../store/constant'
+import HYRO_ABI from "../abi/hyro.json"
+import FACTORY_ABI from "../abi/factory.json"
+import { ethers } from 'ethers'
 
 export default function User() {
   const { id } = useParams()
@@ -18,6 +21,9 @@ export default function User() {
   const [history, setHistory] = useState(false)
   const [historyData, setHistoryData] = useState({})
   const [amountInvest, setAmountInvest] = useState("0")
+  const [hasClicked, setHasClicked] = useState(false)
+  const [hyroContractAddress, setHyroContractAddressd] = useState("0")
+
 
   if (modal) {
     document.body.classList.add('active-modal')
@@ -41,12 +47,42 @@ export default function User() {
       })
   }, [singleUser, history, balances])
 
+
+  //TO GET ADDRESS OF SMART CONTRACT OF HYRO
+  useEffect(() => {
+    const getHyroContractAddress = async () => {
+      const provider = new ethers.providers.Web3Provider(window?.ethereum);
+      const contract = new ethers.Contract(
+        FACTORY_ADDRESS,
+        FACTORY_ABI,
+        provider.getSigner()
+      );
+      const tempAddress = await contract.getHyro(singleUser?.wallet)
+      setHyroContractAddressd(tempAddress)
+    }
+    hasClicked && getHyroContractAddress().catch(console.error)
+  }, [hasClicked])
+
+  //TO INVEST
+  useEffect(() => {
+    const investOnHyro = async () => {
+      const provider = new ethers.providers.Web3Provider(window?.ethereum);
+      const contract = new ethers.Contract(
+        hyroContractAddress,
+        HYRO_ABI,
+        provider.getSigner()
+      );
+      await contract.mint(singleUser?.wallet)
+    }
+    hyroContractAddress !== "0x0000000000000000000000000000000000000000" && investOnHyro().catch(console.error)
+  }, [hyroContractAddress])
+  console.log(hyroContractAddress)
   return (
     <div className="container">
       {singleUser &&
         <>
           <NavBar />
-          {modal && <Modal toggleModal={toggleModal} setAmountInvest={setAmountInvest} name={singleUser?.name} />}
+          {modal && <Modal toggleModal={toggleModal} setAmountInvest={setAmountInvest} name={singleUser?.name} setHasClicked={setHasClicked} />}
           <div style={{ paddingTop: '30px' }} />
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
             <img alt='user' style={{ borderRadius: '50%' }} src={singleUser.logo} width={200} height={200} />
@@ -163,7 +199,11 @@ export default function User() {
                           </a>
                         )
                       })) : (
-                        <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
+                        <>
+                          <div style={{ paddingTop: '30px' }} />
+                          <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
+                          <div style={{ paddingTop: '30px' }} />
+                        </>
                       )}
                     </>
                   )}

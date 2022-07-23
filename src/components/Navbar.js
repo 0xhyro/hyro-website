@@ -33,22 +33,22 @@ function Navbar() {
     <>
       <nav className="navbar " style={{ borderBottom: '1px solid black' }}>
         <div className="container-fluid">
-          <NavLink exact='true' to="/main-app" className="navbar-brand">
+          <NavLink exact={true} to="/main-app" className="navbar-brand">
             <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
               <img alt='logo' src={Logo} width={50} height={50} />
               <h1 style={{ fontWeight: 700 }}>Hyro</h1>
             </div>
           </NavLink>
-          <NavLink exact='true' to="/main-app" className="navbar-brand" activeClassName="underline">
+          <NavLink exact={true} to="/main-app" className="navbar-brand" activeClassName="underline">
             <img alt="home" src={Home} width="30" height="30" />
           </NavLink>
-          <NavLink exact='true' to="/my-profile" className="navbar-brand" activeClassName="underline">
+          <NavLink exact={true} to="/my-profile" className="navbar-brand" activeClassName="underline">
             <img alt="user" src={User} width="30" height="30" />
           </NavLink>
           {/* <img alt="bell" src={Bell} width="30" height="30" /> */}
           {account ? (
             <>
-              {chainId !== 1 ? (
+              {chainId !== 137 ? (
                 <span className="navbar-text text-danger" style={{ border: '1px solid', padding: '10px', borderRadius: "5px" }}>Change chain to Polygon</span>
               ) : (
                 <div style={{ display: 'flex', gap: '20px', alignItems: 'center', cursor: 'pointer' }} onClick={disconnect}>

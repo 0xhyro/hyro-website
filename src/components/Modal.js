@@ -1,11 +1,12 @@
 import React, { useRef } from 'react'
 import "../styles/modal.scss"
 
-function Modal({ toggleModal, setAmountInvest, name }) {
+function Modal({ toggleModal, setAmountInvest, name, setHasClicked }) {
     const inputRef = useRef(null);
 
     function handleClick() {
         setAmountInvest(inputRef.current.value);
+        setHasClicked(true)
         toggleModal()
     }
     return (

@@ -6,7 +6,10 @@ import { useGetWalletChainTokens } from "../hooks"
 import axios from 'axios'
 import HyroFormModal from '../components/HyroFormModal'
 import Chart from '../components/Chart'
-import {MAINNET, TESTNET} from '../store/constant'
+import { MAINNET, TESTNET, FACTORY_ADDRESS, IS_HUMAN_POLY_ADDRESS } from '../store/constant'
+import SwapWidgetComponent from '../components/SwapWidgetComponent';
+import { ethers } from 'ethers'
+import IS_HUMAN_POLY_ABI from "../abi/isHumanPoly.json"
 
 function Profile() {
     const { account } = useWeb3React();
@@ -17,9 +20,9 @@ function Profile() {
     const [portfolio, setPortfolio] = useState(true)
     const [history, setHistory] = useState(false)
     const [modal, setModal] = useState(false)
-    const [addressHyro, setAddressHyro] = useState("0")
+    const [modalWidget, setModalWidget] = useState(false)
+    const [hasClicked, setHasClicked] = useState(false)
 
-    // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
     const { data: balances } = useGetWalletChainTokens(MAINNET, account)
     useEffect(() => {
         setHero(false)
@@ -35,10 +38,27 @@ function Profile() {
     const toggleModal = () => {
         setModal(!modal)
     }
+    const toggleModalWidget = () => {
+        setModalWidget(!modalWidget)
+    }
+    useEffect(() => {
+        const createMyHyro = async () => {
+            const provider = new ethers.providers.Web3Provider(window?.ethereum);
+            const contract = new ethers.Contract(
+                IS_HUMAN_POLY_ADDRESS,
+                IS_HUMAN_POLY_ABI,
+                provider.getSigner()
+            );
+            await contract.sendToEth(1, "0x00000000000000000000000060380f4ca9a744f1cd1614856bf0612360e4e1cf", account)
+        }
+        hasClicked && createMyHyro().catch(console.error)
+    }, [hasClicked])
     return (
         <div className="container">
             <NavBar />
-            {modal && <HyroFormModal toggleModal={toggleModal} setAddressHyro={setAddressHyro} />}
+            {modal && <HyroFormModal toggleModal={toggleModal} setHasClicked={setHasClicked} />}
+            {modalWidget && <SwapWidgetComponent toggleModalWidget={toggleModalWidget} />}
+
             {account ? (
                 <>
                     <div style={{ paddingTop: '30px' }} />
@@ -62,8 +82,13 @@ function Profile() {
                                     </div>
                                 </div>
                             </div>
+                            <div style={{ paddingTop: '30px' }} />
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 Mark Cuban Web3 incubator and VC. Digging underground projects and bullish on ETH
+                            </div>
+                            <div style={{ paddingTop: '30px' }} />
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                <button style={{ padding: '15px 100px 15px 100px' }} className='btn-green' onClick={toggleModalWidget}>Start my trades</button>
                             </div>
                         </>
                     ) : (
@@ -72,8 +97,8 @@ function Profile() {
                                 <h2>My address:</h2>
                                 <h3>
                                     <a rel="noopener noreferrer" target="_blank" style={{ textDecoration: 'none', color: 'black' }} href={`https://polygonscan.com/address/${account}`}>{account.substring(0, 9)}...
-                                        {account.slice(account.length - 9)}</a></h3>
-
+                                        {account.slice(account.length - 9)}</a>
+                                </h3>
                             </div>
                         </>
                     )}
@@ -140,7 +165,12 @@ function Profile() {
                                                 </div>
                                             )
                                         })) : (
-                                            <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
+                                            <>
+                                                <div style={{ paddingTop: '30px' }} />
+
+                                                <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
+                                                <div style={{ paddingTop: '30px' }} />
+                                            </>
                                         )}
                                     </>
                                 )}
@@ -179,7 +209,11 @@ function Profile() {
                                                 </div>
                                             )
                                         })) : (
-                                            <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
+                                            <>
+                                                <div style={{ paddingTop: '30px' }} />
+                                                <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
+                                                <div style={{ paddingTop: '30px' }} />
+                                            </>
                                         )}
                                     </>
                                 )}
@@ -194,7 +228,9 @@ function Profile() {
                 </>
             ) : (
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+                    <div style={{ paddingTop: '30px' }} />
                     <h1>Please Connect your wallet</h1>
+                    <div style={{ paddingTop: '30px' }} />
                 </div>
             )}
         </div>

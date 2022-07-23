@@ -1,11 +1,26 @@
 import React, { useRef } from 'react'
 import "../styles/modal.scss"
 
-function HyroFormModal({ toggleModal, setAddressHyro }) {
+// const getOwnerNFT = async () => {
+//     // @ts-ignore
+//     const provider = new ethers.providers.Web3Provider(window?.ethereum);
+//     const contract = new ethers.Contract(
+//       collectionInfo.contractAddress,
+//       FarCollection1Abi,
+//       provider.getSigner()
+//     );
+//     const owner = await contract.ownerOf(tokenId);
+//     if (owner === Farandole_Owned)
+//       setOwner(true)
+//     else
+//       setOwner(false)
+//   }
+
+function HyroFormModal({ toggleModal, setHasClicked }) {
     const inputRef = useRef(null);
 
-    function handleClick() {
-        setAddressHyro(inputRef.current.value);
+    const handleClick = async () => {
+        setHasClicked(true);
         toggleModal()
     }
     return (
@@ -13,11 +28,10 @@ function HyroFormModal({ toggleModal, setAddressHyro }) {
             <div className="overlay" onClick={toggleModal} ></div>
             <div className='modal-content'>
                 <div className='main-content' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <h1 style={{textAlign: 'center'}}>Become a Hyro today!</h1>
+                    <h1 style={{ textAlign: 'center' }}>Become a Hyro today!</h1>
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 20 }}>
-                        <div style={{ }}>
-                            <p style={{ textAlign: 'center' }}>Address</p>
-                            <input ref={inputRef} type="text" id="address" name="address" placeholder="0x..." style={{ width: '100%', padding: '10px', borderRadius: '5px', backgroundColor: '#EAEAEA' }} />
+                        <div style={{}}>
+                            <p style={{ textAlign: 'center' }}>Click below to become a Hyro!</p>
                         </div>
                         <button onClick={handleClick} className='btn-green'>Join</button>
                     </div>
