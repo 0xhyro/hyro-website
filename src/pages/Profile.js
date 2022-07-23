@@ -10,6 +10,7 @@ import { MAINNET, TESTNET, FACTORY_ADDRESS, IS_HUMAN_POLY_ADDRESS } from '../sto
 import SwapWidgetComponent from '../components/SwapWidgetComponent';
 import { ethers } from 'ethers'
 import IS_HUMAN_POLY_ABI from "../abi/isHumanPoly.json"
+import FACTORY_ABI from "../abi/factory.json"
 
 function Profile() {
     const { account } = useWeb3React();
@@ -22,11 +23,10 @@ function Profile() {
     const [modal, setModal] = useState(false)
     const [modalWidget, setModalWidget] = useState(false)
     const [hasClicked, setHasClicked] = useState(false)
+    const [hyroContractAddress, setHyroContractAddressd] = useState("0")
 
     const { data: balances } = useGetWalletChainTokens(MAINNET, account)
-    useEffect(() => {
-        setHero(false)
-    }, [])
+
 
     useEffect(() => {
         axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${account}&startblock=15026778&endblock=999999999&sort=asc&apikey=M4ARD2Z4QDNPQU5W2ASZY9ASIH74CFYPUY`)
@@ -41,6 +41,8 @@ function Profile() {
     const toggleModalWidget = () => {
         setModalWidget(!modalWidget)
     }
+
+    //TO BECOME A HYRO
     useEffect(() => {
         const createMyHyro = async () => {
             const provider = new ethers.providers.Web3Provider(window?.ethereum);
@@ -53,6 +55,25 @@ function Profile() {
         }
         hasClicked && createMyHyro().catch(console.error)
     }, [hasClicked])
+
+    //TO CHECK IF USER IS A HYRO OR NOT
+    useEffect(() => {
+        const getHyroContractAddress = async () => {
+            const provider = new ethers.providers.Web3Provider(window?.ethereum);
+            const contract = new ethers.Contract(
+                FACTORY_ADDRESS,
+                FACTORY_ABI,
+                provider.getSigner()
+            );
+            const tempAddress = await contract.getHyro(account)
+            setHyroContractAddressd(tempAddress)
+        }
+        hasClicked && getHyroContractAddress().catch(console.error)
+    }, [hasClicked])
+
+    useEffect(() => {
+        hyroContractAddress !== "0x0000000000000000000000000000000000000000" ? setHero(true) : setHero(false)
+    }, [hyroContractAddress])
     return (
         <div className="container">
             <NavBar />
