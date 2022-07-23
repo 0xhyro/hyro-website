@@ -1,27 +1,37 @@
-import React, { useEffect, useState } from 'react'
 import NavBar from '../components/Navbar'
 import Users from '../store/users.json'
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import Loupe from '../assets/images/loupe.png'
+
+const getFilteredItems = (query, items) => {
+  if (!query) {
+    return items;
+  }
+  return items.filter(item => item.name.includes(query))
+}
 
 export default function MainApp() {
-  const [color, setColor] = useState("")
-
-
-  // const redOrGreen = (word) => {
-  //   word.charAt(0) === '-' ? setColor('red') : setColor('green')
-  //   console.log(color)
-  //   return (
-  //     <div >
-  //       {word}
-  //     </div>
-  //   )
-  // }
+  const [query, setQuery] = useState("")
+  const filteredItems = getFilteredItems(query, Users)
   return (
     <div className="container">
       <NavBar />
       <div style={{ paddingTop: '30px' }} />
-      <input type="text" id="search" name="search" placeholder="Search" style={{ padding: '10px', width: '100%', borderRadius: '5px', backgroundColor: '#EAEAEA' }} />
+      <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
+
+      <img alt='loupe' src={Loupe} width={25} height={25} />
+      <input
+        onChange={e => setQuery(e.target.value)}
+        type="text"
+        id="search"
+        name="search"
+        placeholder="Search a hyro"
+        style={{ padding: '10px', width: '100%', borderRadius: '5px', backgroundColor: '#EAEAEA' }}
+        />
+        </div>
       <div style={{ paddingTop: '30px' }} />
+      <h1 style={{ textAlign: 'center' }}>Hyro Leader board</h1>
       <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', fontWeight: 700, fontSize: "1.5em" }}>
         <div style={{ width: '25%', textAlign: 'center' }}>
           Id
@@ -36,11 +46,11 @@ export default function MainApp() {
           APR
         </div>
       </div>
-      {Users.map(user => {
+      {filteredItems.map(user => {
         let pColor = user.apr.charAt(0) === '-' ? 'red' : 'green'
         return (
           <Link exact='true' to={`/${user.id}`} key={user.id} style={{ textDecoration: 'none', color: 'black' }}>
-            <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', cursor: 'pointer' }}>
+            <div className='row-display-click'>
               <div style={{ width: '25%', textAlign: 'center' }}>
                 {user.id + 1}
               </div>

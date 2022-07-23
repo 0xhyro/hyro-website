@@ -38,5 +38,15 @@
         "followers": "1232",
         "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
         "wallet": "0xf89d7b9c864f589bbF53a82105107622B35EaA40"
+    },
+    {
+        "id": 4,
+        "name": "Jeanne",
+        "invested": "$2,399,200",
+        "apr": "+87%",
+        "logo": "images/mark-min.png",
+        "followers": "3023",
+        "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
+        "wallet": "0xf89d7b9c864f589bbF53a82105107622B35EaA40"
     }
 ]

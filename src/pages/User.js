@@ -3,13 +3,10 @@ import { useParams } from 'react-router-dom'
 import NavBar from '../components/Navbar'
 import Modal from '../components/Modal'
 import { useGetWalletChainTokens } from "../hooks"
-import { useWeb3React } from "@web3-react/core";
 import users from "../store/users.json"
 import axios from 'axios'
-import { ethers } from 'ethers'
 
 export default function User() {
-  const { account } = useWeb3React();
   const { id } = useParams()
   const [singleUser, setSingleUser] = useState([])
   const [modal, setModal] = useState(false)
@@ -18,6 +15,7 @@ export default function User() {
   const [portfolio, setPortfolio] = useState(true)
   const [history, setHistory] = useState(false)
   const [historyData, setHistoryData] = useState({})
+  const [amountInvest, setAmountInvest] = useState("0")
 
   if (modal) {
     document.body.classList.add('active-modal')
@@ -31,7 +29,7 @@ export default function User() {
 
   useEffect(() => {
     setSingleUser(users[id])
-  }, [users, id])
+  }, [id])
 
   // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
   const { data: balances } = useGetWalletChainTokens(137, singleUser?.wallet)
@@ -42,18 +40,15 @@ export default function User() {
       })
   }, [singleUser, history, balances])
 
-  console.log('historyData.message',historyData?.message)
-  console.log('historyData',historyData)
-
   return (
     <div className="container">
       {singleUser &&
         <>
           <NavBar />
-          {modal && <Modal toggleModal={toggleModal} />}
+          {modal && <Modal toggleModal={toggleModal} setAmountInvest={setAmountInvest} />}
           <div style={{ paddingTop: '30px' }} />
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
-            <img style={{ borderRadius: '50%' }} src={singleUser.logo} width={200} height={200} />
+            <img alt='user' style={{ borderRadius: '50%' }} src={singleUser.logo} width={200} height={200} />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <h1>
                 {singleUser.name}
@@ -65,7 +60,7 @@ export default function User() {
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '30px' }}>
             {singleUser.description}
           </div>
           <div style={{ paddingTop: '30px' }} />
@@ -109,7 +104,7 @@ export default function User() {
                       </div>
                       {balances && balances.map((balance, index) => {
                         return (
-                          <div key={index} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
+                          <div key={index} className='row-display'>
                             <div style={{ width: '25%', textAlign: 'center' }}>
                               {balance?.token?.symbol}
                             </div>
@@ -117,10 +112,10 @@ export default function User() {
                               ${balance?.price.toString().substring(0, 5)}
                             </div>
                             <div style={{ width: '25%', textAlign: 'center' }}>
-                              ${balance?.amount.toString().substring(0, 10)}
+                              ${balance?.amount.toLocaleString('en-US')}
                             </div>
                             <div style={{ width: '25%', textAlign: 'center' }}>
-                              <img src={balance?.logo} width={30} height={30} />
+                              <img alt='logo' src={balance?.logo} width={30} height={30} />
                             </div>
                           </div>
                         )
@@ -144,9 +139,9 @@ export default function User() {
                           Name
                         </div>
                       </div>
-                      {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.map((histo, index) => {
+                      {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.reverse().slice(0,20).map((histo, index) => {
                         return (
-                          <div key={index} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
+                          <a key={index} rel="noopener noreferrer" target="_blank" className='row-display-click' href={`https://polygonscan.com/block/${histo?.blockNumber?.toString()}`}>
                             <div style={{ width: '25%', textAlign: 'center' }}>
                               {histo?.blockHash?.toString().substring(0, 20)}
                             </div>
@@ -154,12 +149,13 @@ export default function User() {
                               {histo?.blockNumber}
                             </div>
                             <div style={{ width: '25%', textAlign: 'center' }}>
+                              {/* {ethers.utils.parseUnits(histo?.value, histo?.tokenDecimal)} */}
                               {histo?.value}
                             </div>
                             <div style={{ width: '25%', textAlign: 'center' }}>
                               {histo?.tokenName}
                             </div>
-                          </div>
+                          </a>
                         )
                       })) : (
                         <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
