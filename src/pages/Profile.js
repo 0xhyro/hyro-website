@@ -24,9 +24,7 @@ function Profile() {
     const [modalWidget, setModalWidget] = useState(false)
     const [hasClicked, setHasClicked] = useState(false)
     const [hyroContractAddress, setHyroContractAddressd] = useState("0")
-
     const { data: balances } = useGetWalletChainTokens(MAINNET, account)
-
 
     useEffect(() => {
         axios.get(`https://api.etherscan.io/api?module=account&action=tokentx&address=${account}&startblock=15026778&endblock=999999999&sort=asc&apikey=M4ARD2Z4QDNPQU5W2ASZY9ASIH74CFYPUY`)
@@ -68,8 +66,8 @@ function Profile() {
             const tempAddress = await contract.getHyro(account)
             setHyroContractAddressd(tempAddress)
         }
-        hasClicked && getHyroContractAddress().catch(console.error)
-    }, [hasClicked])
+        account && getHyroContractAddress().catch(console.error)
+    }, [account])
 
     useEffect(() => {
         hyroContractAddress !== "0x0000000000000000000000000000000000000000" ? setHero(true) : setHero(false)
