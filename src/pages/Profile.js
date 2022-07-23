@@ -16,7 +16,7 @@ function Profile() {
     const { account } = useWeb3React();
     const [transaction, setTransaction] = useState(true)
     const [performance, setPerformance] = useState(false)
-    const [isHero, setHero] = useState()
+    const [isHero, setHero] = useState(false)
     const [historyData, setHistoryData] = useState({})
     const [portfolio, setPortfolio] = useState(true)
     const [history, setHistory] = useState(false)
@@ -59,19 +59,17 @@ function Profile() {
         const getHyroContractAddress = async () => {
             const provider = new ethers.providers.Web3Provider(window?.ethereum);
             const contract = new ethers.Contract(
-                FACTORY_ADDRESS,
-                FACTORY_ABI,
+                IS_HUMAN_POLY_ADDRESS,
+                IS_HUMAN_POLY_ABI,
                 provider.getSigner()
             );
-            const tempAddress = await contract.getHyro(account)
-            setHyroContractAddressd(tempAddress)
+            const tempAddress = await contract.humans(account)
+            setHero(tempAddress)
         }
-        account && getHyroContractAddress().catch(console.error)
+        account && getHyroContractAddress()
     }, [account])
-
-    useEffect(() => {
-        hyroContractAddress !== "0x0000000000000000000000000000000000000000" ? setHero(true) : setHero(false)
-    }, [hyroContractAddress])
+    console.log(account)
+    https://api.etherscan.io/api?module=account&action=tokentx&address=0xc043D71F7455F9e8b65bC037E9252F6fD83849ef&startblock=15026778&endblock=999999999&sort=asc&apikey=M4ARD2Z4QDNPQU5W2ASZY9ASIH74CFYPUY
     return (
         <div className="container">
             <NavBar />
@@ -186,7 +184,6 @@ function Profile() {
                                         })) : (
                                             <>
                                                 <div style={{ paddingTop: '30px' }} />
-
                                                 <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>
                                                 <div style={{ paddingTop: '30px' }} />
                                             </>

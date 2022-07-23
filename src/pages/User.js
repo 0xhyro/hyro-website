@@ -76,7 +76,6 @@ export default function User() {
     }
     hyroContractAddress !== "0x0000000000000000000000000000000000000000" && investOnHyro().catch(console.error)
   }, [hyroContractAddress])
-  console.log(hyroContractAddress)
   return (
     <div className="container">
       {singleUser &&
