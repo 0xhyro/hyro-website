@@ -32,6 +32,7 @@ function Profile() {
     const toggleModal = () => {
         setModal(!modal)
       }
+      
     return (
         <div className="container">
             <NavBar />
@@ -153,7 +154,7 @@ function Profile() {
                                                 Name
                                             </div>
                                         </div>
-                                        {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.map((histo, index) => {
+                                        {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.reverse().map((histo, index) => {
                                             return (
                                                 <div key={index} className='row-display'>
                                                     <div style={{ width: '25%', textAlign: 'center' }}>

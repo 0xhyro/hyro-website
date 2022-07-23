@@ -39,7 +39,6 @@ export default function User() {
       })
   }, [singleUser, history, balances])
   // historyData && console.log(historyData)
-
   return (
     <div className="container">
       {singleUser &&
@@ -139,9 +138,9 @@ export default function User() {
                           Name
                         </div>
                       </div>
-                      {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.map((histo, index) => {
+                      {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.reverse().slice(0,20).map((histo, index) => {
                         return (
-                          <div key={index} className='row-display'>
+                          <a key={index} rel="noopener noreferrer" target="_blank" className='row-display-click' href={`https://polygonscan.com/block/${histo?.blockNumber?.toString()}`}>
                             <div style={{ width: '25%', textAlign: 'center' }}>
                               {histo?.blockHash?.toString().substring(0, 20)}
                             </div>
@@ -155,7 +154,7 @@ export default function User() {
                             <div style={{ width: '25%', textAlign: 'center' }}>
                               {histo?.tokenName}
                             </div>
-                          </div>
+                          </a>
                         )
                       })) : (
                         <h1 style={{ textAlign: 'center' }}>No data on Polygon</h1>

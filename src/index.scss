@@ -142,6 +142,8 @@ h1 {
     gap: 20;
     justify-content: space-between;
     cursor: pointer;
+    text-decoration: none;
+    color: black;
 }
 
 .row-display-click:hover {
@@ -152,4 +154,5 @@ h1 {
     justify-content: space-between;
     cursor: pointer;
     font-family: 'bold';
+    color: black;
 }
