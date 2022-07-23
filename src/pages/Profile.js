@@ -68,7 +68,10 @@ function Profile() {
                         <>
                             <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: 30 }}>
                                 <h2>My address:</h2>
-                                <h3>{account}</h3>
+                                <h3>
+                                    <a rel="noopener noreferrer" target="_blank" style={{textDecoration: 'none', color: 'black'}} href={`https://polygonscan.com/address/${account}`}>{account.substring(0, 9)}...
+                                    {account.slice(account.length - 9)}</a></h3>
+
                             </div>
                         </>
                     )}
