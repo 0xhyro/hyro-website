@@ -2,13 +2,13 @@ import React from 'react'
 import Home from '../assets/images/home.png'
 import Bell from '../assets/images/bell.png'
 import User from '../assets/images/user.png'
+import Logo from "../assets/images/hyroLogo.png"
 import { Link } from 'react-router-dom';
 import { useWeb3React } from "@web3-react/core";
 import {
   injected,
 } from "../helpers/connectors";
 import "../index.scss"
-
 
 function Navbar() {
   const { account, activate, chainId } = useWeb3React();
@@ -26,7 +26,10 @@ function Navbar() {
       <nav className="navbar " style={{ borderBottom: '1px solid black' }}>
         <div className="container-fluid">
           <Link exact='true' to="/main-app" className="navbar-brand">
-            <h1 style={{fontWeight: 700}}>Hyro</h1>
+            <div style={{display: 'flex', gap: 10, alignItems: 'center'}}>
+              <img alt='logo' src={Logo} width={50} height={50} />
+              <h1 style={{ fontWeight: 700 }}>Hyro</h1>
+            </div>
           </Link>
           <Link exact='true' to="/main-app" className="navbar-brand">
             <img alt="home" src={Home} width="30" height="30" />

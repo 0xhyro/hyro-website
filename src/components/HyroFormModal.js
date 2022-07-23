@@ -1,14 +1,13 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import "../styles/modal.scss"
 
-function HyroFormModal({ toggleModal }) {
-    const [address, setAddress] = useState("0")
+function HyroFormModal({ toggleModal, setAddressHyro }) {
     const inputRef = useRef(null);
 
     function handleClick() {
-        setAddress(inputRef.current.value);
+        setAddressHyro(inputRef.current.value);
+        toggleModal()
     }
-    console.log(address)
     return (
         <div className='modal' style={{ display: "flex" }} >
             <div className="overlay" onClick={toggleModal} ></div>

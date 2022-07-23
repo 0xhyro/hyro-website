@@ -15,6 +15,7 @@ function Profile() {
     const [portfolio, setPortfolio] = useState(true)
     const [history, setHistory] = useState(false)
     const [modal, setModal] = useState(false)
+    const [addressHyro, setAddressHyro] = useState("0")
 
     // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
     const { data: balances } = useGetWalletChainTokens(137, account)
@@ -31,12 +32,11 @@ function Profile() {
 
     const toggleModal = () => {
         setModal(!modal)
-      }
-      
+    }
     return (
         <div className="container">
             <NavBar />
-            {modal && <HyroFormModal toggleModal={toggleModal} />}
+            {modal && <HyroFormModal toggleModal={toggleModal} setAddressHyro={setAddressHyro} />}
             {account ? (
                 <>
                     {isHero ? (

@@ -1,14 +1,13 @@
-import React, { useState, useRef } from 'react'
+import React, { useRef } from 'react'
 import "../styles/modal.scss"
 
-function Modal({ toggleModal }) {
-    const [amount, setAmount] = useState("0")
+function Modal({ toggleModal, setAmountInvest }) {
     const inputRef = useRef(null);
 
     function handleClick() {
-        setAmount(inputRef.current.value);
+        setAmountInvest(inputRef.current.value);
+        toggleModal()
     }
-    console.log(amount)
     return (
         <>
             <div className='modal' style={{ display: "flex" }} >

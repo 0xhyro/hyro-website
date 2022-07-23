@@ -15,6 +15,7 @@ export default function User() {
   const [portfolio, setPortfolio] = useState(true)
   const [history, setHistory] = useState(false)
   const [historyData, setHistoryData] = useState({})
+  const [amountInvest, setAmountInvest] = useState("0")
 
   if (modal) {
     document.body.classList.add('active-modal')
@@ -38,13 +39,13 @@ export default function User() {
         setHistoryData(res.data)
       })
   }, [singleUser, history, balances])
-  // historyData && console.log(historyData)
+
   return (
     <div className="container">
       {singleUser &&
         <>
           <NavBar />
-          {modal && <Modal toggleModal={toggleModal} />}
+          {modal && <Modal toggleModal={toggleModal} setAmountInvest={setAmountInvest} />}
           <div style={{ paddingTop: '30px' }} />
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
             <img alt='user' style={{ borderRadius: '50%' }} src={singleUser.logo} width={200} height={200} />
