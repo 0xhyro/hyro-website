@@ -41,12 +41,12 @@
     },
     {
         "id": 4,
-        "name": "Jeanne",
-        "invested": "$2,399,200",
-        "apr": "+87%",
-        "logo": "images/mark-min.png",
-        "followers": "3023",
+        "name": "Antiyro",
+        "invested": "$0",
+        "apr": "0%",
+        "logo": "images/anti.jpeg",
+        "followers": "0",
         "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
-        "wallet": "0xf89d7b9c864f589bbF53a82105107622B35EaA40"
+        "wallet": "0xc043D71F7455F9e8b65bC037E9252F6fD83849ef"
     }
 ]

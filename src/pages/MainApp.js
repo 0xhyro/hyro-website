@@ -1,8 +1,11 @@
 import NavBar from '../components/Navbar'
 import Users from '../store/users.json'
 import { Link } from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Loupe from '../assets/images/loupe.png'
+import axios from 'axios'
+import { POH_THE_GRAPH } from '../store/constant'
+import NatPic from '../assets/images/anti.jpeg'
 
 const getFilteredItems = (query, items) => {
   if (!query) {
@@ -14,12 +17,37 @@ const getFilteredItems = (query, items) => {
 export default function MainApp() {
   const [query, setQuery] = useState("")
   const filteredItems = getFilteredItems(query, Users)
+  const [meta, setMeta] = useState()
+
+  useEffect(() => {
+    axios.post(POH_THE_GRAPH, {
+      query: `
+      {
+        submissions(where : {id: "0xc043d71f7455f9e8b65bc037e9252f6fd83849ef"}) {
+          id
+          name
+          requests {
+            evidence(orderBy: creationTime, first: 1) {
+              URI
+            }
+          }
+        }
+      }
+  `
+    }).then((res) => {
+      setMeta(res.data.data.submissions[0])
+    })
+      .catch((error) => {
+        console.error(error)
+      })
+  }, [])
+
   return (
     <div className="container">
       <NavBar />
       <div style={{ paddingTop: '30px' }} />
-      <h1 style={{textAlign: 'center', fontSize: '4em'}}>Welcome to Hyro</h1>
-      <h3 style={{textAlign: 'center'}}>From <span style={{fontFamily: 'bold', color: '#6e6e6e'}}>Zyro</span> to <span style={{ fontFamily: 'bold'}}>Hyro</span>.</h3>
+      <h1 style={{ textAlign: 'center', fontSize: '4em' }}>Welcome to Hyro</h1>
+      <h3 style={{ textAlign: 'center' }}>From <span style={{ fontFamily: 'bold', color: '#6e6e6e' }}>Zyro</span> to <span style={{ fontFamily: 'bold' }}>Hyro</span>.</h3>
       <div style={{ paddingTop: '30px' }} />
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <img alt='loupe' src={Loupe} width={25} height={25} />
@@ -48,13 +76,32 @@ export default function MainApp() {
           APR
         </div>
       </div>
+      {/* NATHAN */}
+      <Link exact='true' to={`/4`} style={{ textDecoration: 'none', color: 'black' }}>
+      <div className='row-display-click'>
+        <div style={{ width: '25%', textAlign: 'center' }}>
+          <img style={{ borderRadius: '50%' }} alt='logo' src={NatPic} width={50} height={50} />
+        </div>
+        <div style={{ width: '25%', textAlign: 'center' }}>
+          {meta?.name}
+        </div>
+        <div style={{ width: '25%', textAlign: 'center' }}>
+          $0
+        </div>
+        <div style={{ width: '25%', textAlign: 'center' }}>
+          0
+        </div>
+      </div>
+      </Link>
+
+      {/* FIN NATHAN */}
       {filteredItems.map(user => {
         let pColor = user.apr.charAt(0) === '-' ? 'red' : 'green'
         return (
           <Link exact='true' to={`/${user.id}`} key={user.id} style={{ textDecoration: 'none', color: 'black' }}>
             <div className='row-display-click'>
-            <div style={{ width: '25%', textAlign: 'center' }}>
-              <img style={{borderRadius: '50%'}} alt='logo' src={user?.logo} width={50} height={50} />
+              <div style={{ width: '25%', textAlign: 'center' }}>
+                <img style={{ borderRadius: '50%' }} alt='logo' src={user?.logo} width={50} height={50} />
               </div>
               <div style={{ width: '25%', textAlign: 'center' }}>
                 {user.name}
