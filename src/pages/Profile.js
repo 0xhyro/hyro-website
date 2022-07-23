@@ -23,7 +23,6 @@ function Profile() {
     const [modal, setModal] = useState(false)
     const [modalWidget, setModalWidget] = useState(false)
     const [hasClicked, setHasClicked] = useState(false)
-    const [hyroContractAddress, setHyroContractAddressd] = useState("0")
     const { data: balances } = useGetWalletChainTokens(MAINNET, account)
 
     useEffect(() => {
@@ -68,8 +67,6 @@ function Profile() {
         }
         account && getHyroContractAddress()
     }, [account])
-    console.log(account)
-    https://api.etherscan.io/api?module=account&action=tokentx&address=0xc043D71F7455F9e8b65bC037E9252F6fD83849ef&startblock=15026778&endblock=999999999&sort=asc&apikey=M4ARD2Z4QDNPQU5W2ASZY9ASIH74CFYPUY
     return (
         <div className="container">
             <NavBar />
