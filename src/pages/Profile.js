@@ -39,12 +39,12 @@ function Profile() {
             {modal && <HyroFormModal toggleModal={toggleModal} setAddressHyro={setAddressHyro} />}
             {account ? (
                 <>
+                    <div style={{ paddingTop: '30px' }} />
                     {isHero ? (
                         <h1 style={{ textAlign: 'center' }}>Your Hyro Profile:</h1>
                     ) : (
                         <h1 style={{ textAlign: 'center' }}>Your Zyro Profile:</h1>
                     )}
-                    <div style={{ paddingTop: '30px' }} />
                     {isHero ? (
                         <>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>

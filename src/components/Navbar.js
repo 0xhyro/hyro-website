@@ -3,7 +3,7 @@ import Home from '../assets/images/home.png'
 import Bell from '../assets/images/bell.png'
 import User from '../assets/images/user.png'
 import Logo from "../assets/images/hyroLogo.png"
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useWeb3React } from "@web3-react/core";
 import {
   injected,
@@ -25,19 +25,19 @@ function Navbar() {
     <>
       <nav className="navbar " style={{ borderBottom: '1px solid black' }}>
         <div className="container-fluid">
-          <Link exact='true' to="/main-app" className="navbar-brand">
-            <div style={{display: 'flex', gap: 10, alignItems: 'center'}}>
+          <NavLink exact='true' to="/main-app" className="navbar-brand">
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
               <img alt='logo' src={Logo} width={50} height={50} />
               <h1 style={{ fontWeight: 700 }}>Hyro</h1>
             </div>
-          </Link>
-          <Link exact='true' to="/main-app" className="navbar-brand">
+          </NavLink>
+          <NavLink exact='true' to="/main-app" className="navbar-brand" activeClassName="underline">
             <img alt="home" src={Home} width="30" height="30" />
-          </Link>
-          <Link exact='true' to="/my-profile" className="navbar-brand">
+          </NavLink>
+          <NavLink exact='true' to="/my-profile" className="navbar-brand" activeClassName="underline">
             <img alt="user" src={User} width="30" height="30" />
-          </Link>
-          <img alt="bell" src={Bell} width="30" height="30" />
+          </NavLink>
+          {/* <img alt="bell" src={Bell} width="30" height="30" /> */}
           {account ? (
             <>
               {chainId !== 1 ? (

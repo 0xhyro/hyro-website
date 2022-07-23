@@ -88,6 +88,7 @@ export default function User() {
                 <>
                   {portfolio && (
                     <>
+                      <h1 style={{ textAlign: 'center' }}>Portfolio</h1>
                       <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
                         <div style={{ width: '25%', textAlign: 'center' }}>
                           Asset
@@ -125,6 +126,7 @@ export default function User() {
                   )}
                   {history && historyData && (
                     <>
+                      <h1 style={{ textAlign: 'center' }}>History</h1>
                       <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', backgroundColor: '#D9D9D9' }}>
                         <div style={{ width: '25%', textAlign: 'center' }}>
                           Txn Hash
@@ -139,7 +141,7 @@ export default function User() {
                           Name
                         </div>
                       </div>
-                      {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.reverse().slice(0,20).map((histo, index) => {
+                      {historyData && historyData.message === 'OK' && Object.keys(historyData).length !== 0 ? (historyData?.result?.reverse().slice(0, 20).map((histo, index) => {
                         return (
                           <a key={index} rel="noopener noreferrer" target="_blank" className='row-display-click' href={`https://polygonscan.com/block/${histo?.blockNumber?.toString()}`}>
                             <div style={{ width: '25%', textAlign: 'center' }}>
@@ -165,7 +167,9 @@ export default function User() {
                 </>
               )}
             {performance && (
-              <h1>Performance</h1>
+              <>
+                <h1 style={{ textAlign: 'center' }}>Performance</h1>
+              </>
             )}
           </div>
         </>
