@@ -6,13 +6,16 @@ import { Link } from 'react-router-dom'
 export default function MainApp() {
   const [color, setColor] = useState("")
 
-  useEffect(() => {
-    const greenColor = (word) => {
-      word.charAt(0) === '-' ? setColor('red') : setColor('green')
-    }
-    greenColor("+300")
-  })
 
+  // const redOrGreen = (word) => {
+  //   word.charAt(0) === '-' ? setColor('red') : setColor('green')
+  //   console.log(color)
+  //   return (
+  //     <div >
+  //       {word}
+  //     </div>
+  //   )
+  // }
   return (
     <div className="container">
       <NavBar />
@@ -38,6 +41,7 @@ export default function MainApp() {
         </div>
       </div>
       {Users.map(user => {
+        let pColor = user.apr.charAt(0) === '-' ? 'red' : 'green'
         return (
           <Link exact='true' to={`/${user.id}`} key={user.id} style={{ textDecoration: 'none', color: 'black' }}>
             <div style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between', cursor: 'pointer' }}>
@@ -53,7 +57,7 @@ export default function MainApp() {
                 <div>
                   {user.invested}
                 </div>
-                <div>
+                <div style={{color: pColor}}>
                   {user.apr}
                 </div>
               </div>

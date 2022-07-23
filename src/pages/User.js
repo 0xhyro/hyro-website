@@ -32,7 +32,6 @@ export default function User() {
   useEffect(() => {
     setSingleUser(users[id])
   }, [users, id])
-  console.log(singleUser)
 
   // 0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B
   const { data: balances } = useGetWalletChainTokens(137, singleUser?.wallet)
@@ -41,7 +40,7 @@ export default function User() {
       .then(res => {
         setHistoryData(res.data)
       })
-  }, [singleUser])
+  }, [singleUser, history, balances])
   return (
     <div className="container">
       {singleUser &&
@@ -80,7 +79,7 @@ export default function User() {
                   (
                     <div style={{ display: 'flex', justifyContent: 'center', gap: 10 }}>
                       <button className={portfolio ? 'btn-gray' : 'btn-gray-outline'} onClick={() => { setPortfolio(true); setHistory(false); }}>Portfolio</button>
-                      <button className={history ? 'btn-gray' : 'btn-gray-outline'} onClick={() => { setPortfolio(false); setHistory(true); }}>History</button>
+                      <button className={history ? 'btn-gray' : 'btn-gray-outline'} onClick={() => { setHistory(true); setPortfolio(false); }}>History</button>
                     </div>
                   )}
               </div>
@@ -141,7 +140,7 @@ export default function User() {
                           Name
                         </div>
                       </div>
-                      {historyData && historyData?.result && historyData?.result?.length > 0 ? (historyData?.result?.map((histo, index) => {
+                      {historyData && historyData?.result?.length > 0 ? (historyData?.result?.map((histo, index) => {
                         return (
                           <div key={index} style={{ borderBottom: '1px solid', padding: '10px', display: 'flex', gap: 20, justifyContent: 'space-between' }}>
                             <div style={{ width: '25%', textAlign: 'center' }}>
