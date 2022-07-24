@@ -10,7 +10,7 @@ import { MAINNET, TESTNET, FACTORY_ADDRESS, IS_HUMAN_POLY_ADDRESS } from '../sto
 import SwapWidgetComponent from '../components/SwapWidgetComponent';
 import { ethers } from 'ethers'
 import IS_HUMAN_POLY_ABI from "../abi/isHumanPoly.json"
-import FACTORY_ABI from "../abi/factory.json"
+import Users from '../store/users.json'
 
 function Profile() {
     const { account } = useWeb3React();
@@ -84,21 +84,21 @@ function Profile() {
                     {isHero ? (
                         <>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
-                                <img alt='mark-cuban' style={{ borderRadius: '50%' }} src={Mark} width={200} height={200} />
+                                <img alt='mark-cuban' style={{ borderRadius: '50%' }} src={Users[4].logo} width={200} height={200} />
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     <h1>
-                                        Mark Cuban
+                                        {Users[4].name}
                                     </h1>
                                     <div style={{ display: 'flex', gap: 10 }}>
-                                        <h3>APR: <span style={{ fontWeight: 100 }}>+207%</span></h3>
-                                        <h3>Invested: <span style={{ fontWeight: 100 }}>2,000,343</span></h3>
-                                        <h3>Followers: <span style={{ fontWeight: 100 }}>27,304</span></h3>
+                                        <h3>APR: <span style={{ fontWeight: 100 }}>{Users[4].apr}</span></h3>
+                                        <h3>Invested: <span style={{ fontWeight: 100 }}>{Users[4].invested}</span></h3>
+                                        <h3>Followers: <span style={{ fontWeight: 100 }}>{Users[4].followers}</span></h3>
                                     </div>
                                 </div>
                             </div>
                             <div style={{ paddingTop: '30px' }} />
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                Mark Cuban Web3 incubator and VC. Digging underground projects and bullish on ETH
+                                {Users[4].description}
                             </div>
                             <div style={{ paddingTop: '30px' }} />
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
