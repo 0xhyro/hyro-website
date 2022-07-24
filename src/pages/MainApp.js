@@ -76,25 +76,6 @@ export default function MainApp() {
           APR
         </div>
       </div>
-      {/* NATHAN */}
-      <Link exact='true' to={`/4`} style={{ textDecoration: 'none', color: 'black' }}>
-      <div className='row-display-click'>
-        <div style={{ width: '25%', textAlign: 'center' }}>
-          <img style={{ borderRadius: '50%' }} alt='logo' src={NatPic} width={50} height={50} />
-        </div>
-        <div style={{ width: '25%', textAlign: 'center' }}>
-          {meta?.name}
-        </div>
-        <div style={{ width: '25%', textAlign: 'center' }}>
-          $0
-        </div>
-        <div style={{ width: '25%', textAlign: 'center' }}>
-          0
-        </div>
-      </div>
-      </Link>
-
-      {/* FIN NATHAN */}
       {filteredItems.map(user => {
         let pColor = user.apr.charAt(0) === '-' ? 'red' : 'green'
         return (

@@ -1,46 +1,36 @@
 [
     {
         "id": 0,
-        "name": "Nathan",
-        "invested": "$100,330",
-        "apr": "+122%",
-        "logo": "images/profil1.jpg",
-        "followers": "2903",
-        "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
-        "wallet": "0x06959153B974D0D5fDfd87D561db6d8d4FA0bb0B"
-    },
-    {
-        "id": 1,
         "name": "Victor",
         "invested": "$10,998",
         "apr": "-43%",
-        "logo": "images/profil2.jpg",
+        "logo": "images/vic.jpeg",
         "followers": "23093",
         "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
         "wallet": "0x46cE2DA01290EA2D1BCED39BbA149d017DF34CB9"
     },
     {
-        "id": 2,
+        "id": 1,
         "name": "Clement",
         "invested": "$1,000,898",
         "apr": "+6%",
-        "logo": "images/profil3.jpg",
+        "logo": "images/clem.jpeg",
         "followers": "29943",
         "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
         "wallet": "0xa2074EBD43204ae026ACBc06DD45960A00B75684"
     },
     {
-        "id": 3,
+        "id": 2,
         "name": "Jean Baptiste",
         "invested": "$2,399,200",
         "apr": "+321%",
-        "logo": "images/mark-min.png",
+        "logo": "images/jb.jpeg",
         "followers": "1232",
         "description": "Web3 incubator and VC. Digging underground projects and bullish on ETH",
         "wallet": "0xf89d7b9c864f589bbF53a82105107622B35EaA40"
     },
     {
-        "id": 4,
+        "id": 3,
         "name": "Antiyro",
         "invested": "$0",
         "apr": "0%",
