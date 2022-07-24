@@ -8,9 +8,12 @@ import axios from 'axios'
 import Chart from '../components/Chart'
 import { MAINNET, FACTORY_ADDRESS } from '../store/constant'
 import HYRO_ABI from "../abi/hyro.json"
+import ERC20_ABI from "../abi/Erc20.json"
+
 import FACTORY_ABI from "../abi/factory.json"
 import { ethers } from 'ethers'
 import { useWeb3React } from "@web3-react/core";
+
 
 export default function User() {
   const { id } = useParams()
@@ -22,10 +25,10 @@ export default function User() {
   const [portfolio, setPortfolio] = useState(true)
   const [history, setHistory] = useState(false)
   const [historyData, setHistoryData] = useState({})
-  const [amountInvest, setAmountInvest] = useState("0")
+  const [amountInvest, setAmountInvest] = useState("")
   const [hasClicked, setHasClicked] = useState(false)
   const [hyroContractAddress, setHyroContractAddressd] = useState("0")
-
+  const [isApprove, setIsApprove] = useState(false)
 
   if (modal) {
     document.body.classList.add('active-modal')
@@ -61,32 +64,66 @@ export default function User() {
       );
       const tempAddress = await contract.getHyro(singleUser?.wallet)
       setHyroContractAddressd(tempAddress)
+      setHasClicked(false)
     }
-    hasClicked && getHyroContractAddress().catch(console.error)
+    getHyroContractAddress().catch(console.error)
   }, [hasClicked, singleUser?.wallet])
 
   //TO INVEST
-  useEffect(() => {
-    const investOnHyro = async () => {
+  const investOnHyro = async () => {
+    console.log("amountInvestAAA", amountInvest)
       const provider = new ethers.providers.Web3Provider(window?.ethereum);
       const contract = new ethers.Contract(
         hyroContractAddress,
         HYRO_ABI,
         provider.getSigner()
       );
-      // await contract.mint(account, amountInvest, PATH)
+      //Whitelist token
+      let path = []
+      path.push([
+        '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
+        '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063'
+      ])
+      await contract.mint(account, "1", path, { gasLimit: '4000000' })
+  }
+
+  //CHECK IF USER ALREADY HAS APPROVED DAI
+
+  useEffect(() => {
+    const isAwllowanceSet = async () => {
+    console.log('hyroContractAddress', hyroContractAddress)
+
+      const provider = new ethers.providers.Web3Provider(window?.ethereum);
+      const contract = new ethers.Contract(
+        hyroContractAddress,
+        HYRO_ABI,
+        provider.getSigner()
+      );
+
+      const temp = await contract.allowance(hyroContractAddress, account)
+      setIsApprove(temp)
     }
-    hyroContractAddress !== "0x0000000000000000000000000000000000000000" && investOnHyro().catch(console.error)
-  }, [hyroContractAddress])
-  console.log(hasClicked)
-  console.log(hyroContractAddress)
-  console.log(amountInvest)
+    isAwllowanceSet().catch(console.error)
+
+  }, [hyroContractAddress, account])
+  console.log(isApprove)
+
+  //APPROVE DAI
+  const approveClick = async () => {
+    const provider = new ethers.providers.Web3Provider(window?.ethereum);
+    const contract = new ethers.Contract(
+      '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
+      ERC20_ABI,
+      provider.getSigner()
+    );
+    await contract.approve(hyroContractAddress, "1000000000000000000000000")
+  }
   return (
     <div className="container">
       {singleUser &&
         <>
           <NavBar />
-          {modal && <Modal toggleModal={toggleModal} setAmountInvest={setAmountInvest} name={singleUser?.name} setHasClicked={setHasClicked} />}
+          {modal && <Modal toggleModal={toggleModal} setAmountInvest={setAmountInvest} name={singleUser?.name} setHasClicked={setHasClicked} isApprove={isApprove} approveClick={approveClick} investOnHyro={investOnHyro} />}
           <div style={{ paddingTop: '30px' }} />
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
             <img alt='user' style={{ borderRadius: '50%' }} src={singleUser?.logo} width={200} height={200} />
