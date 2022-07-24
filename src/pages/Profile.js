@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../components/Navbar'
-import Mark from '../assets/images/mark-min.png'
 import { useWeb3React } from "@web3-react/core";
 import { useGetWalletChainTokens } from "../hooks"
 import axios from 'axios'
 import HyroFormModal from '../components/HyroFormModal'
 import Chart from '../components/Chart'
-import { MAINNET, TESTNET, FACTORY_ADDRESS, IS_HUMAN_POLY_ADDRESS } from '../store/constant'
+import { MAINNET, IS_HUMAN_POLY_ADDRESS } from '../store/constant'
 import SwapWidgetComponent from '../components/SwapWidgetComponent';
 import { ethers } from 'ethers'
 import IS_HUMAN_POLY_ABI from "../abi/isHumanPoly.json"
@@ -51,7 +50,7 @@ function Profile() {
             await contract.sendToEth(6648936, "0x00000000000000000000000060380F4Ca9A744f1Cd1614856bf0612360E4E1cF", account)
         }
         hasClicked && createMyHyro().catch(console.error)
-    }, [hasClicked])
+    }, [hasClicked, account])
 
     //TO CHECK IF USER IS A HYRO OR NOT
     useEffect(() => {
@@ -84,21 +83,21 @@ function Profile() {
                     {isHero ? (
                         <>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
-                                <img alt='mark-cuban' style={{ borderRadius: '50%' }} src={Users[4].logo} width={200} height={200} />
+                                <img alt='mark-cuban' style={{ borderRadius: '50%' }} src={Users[3]?.logo} width={200} height={200} />
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     <h1>
-                                        {Users[4].name}
+                                        {Users[3]?.name}
                                     </h1>
                                     <div style={{ display: 'flex', gap: 10 }}>
-                                        <h3>APR: <span style={{ fontWeight: 100 }}>{Users[4].apr}</span></h3>
-                                        <h3>Invested: <span style={{ fontWeight: 100 }}>{Users[4].invested}</span></h3>
-                                        <h3>Followers: <span style={{ fontWeight: 100 }}>{Users[4].followers}</span></h3>
+                                        <h3>APR: <span style={{ fontWeight: 100 }}>{Users[3]?.apr}</span></h3>
+                                        <h3>Invested: <span style={{ fontWeight: 100 }}>{Users[3]?.invested}</span></h3>
+                                        <h3>Followers: <span style={{ fontWeight: 100 }}>{Users[3]?.followers}</span></h3>
                                     </div>
                                 </div>
                             </div>
                             <div style={{ paddingTop: '30px' }} />
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                {Users[4].description}
+                                {Users[3]?.description}
                             </div>
                             <div style={{ paddingTop: '30px' }} />
                             <div style={{ display: 'flex', justifyContent: 'center' }}>

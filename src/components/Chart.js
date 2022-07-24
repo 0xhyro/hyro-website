@@ -40,9 +40,6 @@ export default class Chart extends Component {
 
         }
       },
-      rangeSelector: {
-        selected: 1
-      },
       chart: {
         height: 600,
       },

@@ -1,23 +1,7 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import "../styles/modal.scss"
 
-// const getOwnerNFT = async () => {
-//     // @ts-ignore
-//     const provider = new ethers.providers.Web3Provider(window?.ethereum);
-//     const contract = new ethers.Contract(
-//       collectionInfo.contractAddress,
-//       FarCollection1Abi,
-//       provider.getSigner()
-//     );
-//     const owner = await contract.ownerOf(tokenId);
-//     if (owner === Farandole_Owned)
-//       setOwner(true)
-//     else
-//       setOwner(false)
-//   }
-
 function HyroFormModal({ toggleModal, setHasClicked }) {
-    const inputRef = useRef(null);
 
     const handleClick = async () => {
         setHasClicked(true);

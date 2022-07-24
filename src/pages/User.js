@@ -6,13 +6,15 @@ import { useGetWalletChainTokens } from "../hooks"
 import users from "../store/users.json"
 import axios from 'axios'
 import Chart from '../components/Chart'
-import { MAINNET, TESTNET, FACTORY_ADDRESS } from '../store/constant'
+import { MAINNET, FACTORY_ADDRESS } from '../store/constant'
 import HYRO_ABI from "../abi/hyro.json"
 import FACTORY_ABI from "../abi/factory.json"
 import { ethers } from 'ethers'
+import { useWeb3React } from "@web3-react/core";
 
 export default function User() {
   const { id } = useParams()
+  const { account } = useWeb3React();
   const [singleUser, setSingleUser] = useState([])
   const [modal, setModal] = useState(false)
   const [transaction, setTransaction] = useState(true)
@@ -61,7 +63,7 @@ export default function User() {
       setHyroContractAddressd(tempAddress)
     }
     hasClicked && getHyroContractAddress().catch(console.error)
-  }, [hasClicked])
+  }, [hasClicked, singleUser?.wallet])
 
   //TO INVEST
   useEffect(() => {
@@ -72,10 +74,13 @@ export default function User() {
         HYRO_ABI,
         provider.getSigner()
       );
-      await contract.mint(singleUser?.wallet)
+      // await contract.mint(account, amountInvest, PATH)
     }
     hyroContractAddress !== "0x0000000000000000000000000000000000000000" && investOnHyro().catch(console.error)
   }, [hyroContractAddress])
+  console.log(hasClicked)
+  console.log(hyroContractAddress)
+  console.log(amountInvest)
   return (
     <div className="container">
       {singleUser &&
@@ -84,7 +89,7 @@ export default function User() {
           {modal && <Modal toggleModal={toggleModal} setAmountInvest={setAmountInvest} name={singleUser?.name} setHasClicked={setHasClicked} />}
           <div style={{ paddingTop: '30px' }} />
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 30 }}>
-            <img alt='user' style={{ borderRadius: '50%' }} src={singleUser.logo} width={200} height={200} />
+            <img alt='user' style={{ borderRadius: '50%' }} src={singleUser?.logo} width={200} height={200} />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <h1>
                 {singleUser.name}

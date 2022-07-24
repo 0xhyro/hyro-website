@@ -1,6 +1,5 @@
 import React from 'react'
 import Home from '../assets/images/home.png'
-import Bell from '../assets/images/bell.png'
 import User from '../assets/images/user.png'
 import Logo from "../assets/images/hyroLogo.png"
 import { NavLink } from 'react-router-dom';
@@ -45,7 +44,6 @@ function Navbar() {
           <NavLink exact={true} to="/my-profile" className="navbar-brand" activeClassName="underline">
             <img alt="user" src={User} width="30" height="30" />
           </NavLink>
-          {/* <img alt="bell" src={Bell} width="30" height="30" /> */}
           {account ? (
             <>
               {chainId !== 137 ? (
