@@ -71,7 +71,6 @@ export default function User() {
 
   //TO INVEST
   const investOnHyro = async () => {
-    console.log("amountInvestAAA", amountInvest)
       const provider = new ethers.providers.Web3Provider(window?.ethereum);
       const contract = new ethers.Contract(
         hyroContractAddress,
@@ -84,15 +83,12 @@ export default function User() {
         '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
         '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063'
       ])
-      await contract.mint(account, "1", path, { gasLimit: '4000000' })
+      await contract.mint(account, amountInvest, path, { gasLimit: '4000000' })
   }
 
   //CHECK IF USER ALREADY HAS APPROVED DAI
-
   useEffect(() => {
     const isAwllowanceSet = async () => {
-    console.log('hyroContractAddress', hyroContractAddress)
-
       const provider = new ethers.providers.Web3Provider(window?.ethereum);
       const contract = new ethers.Contract(
         hyroContractAddress,
@@ -106,7 +102,6 @@ export default function User() {
     isAwllowanceSet().catch(console.error)
 
   }, [hyroContractAddress, account])
-  console.log(isApprove)
 
   //APPROVE DAI
   const approveClick = async () => {

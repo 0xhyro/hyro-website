@@ -115,7 +115,6 @@ function Profile() {
                             </div>
                         </>
                     )}
-
                     <div style={{ paddingTop: '30px' }} />
                     {!isHero && (
                         <>
@@ -184,6 +183,8 @@ function Profile() {
                                                 <div style={{ paddingTop: '30px' }} />
                                             </>
                                         )}
+                                        <div style={{ paddingTop: '30px' }} />
+
                                     </>
                                 )}
                                 {history && historyData && (
